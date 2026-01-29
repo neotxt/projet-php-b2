@@ -33,7 +33,7 @@ CREATE TABLE Vetements (
     taille VARCHAR(20),
     marque VARCHAR(50),
     etat VARCHAR(30), -- neuf, très bon état, etc.
-    image VARCHAR(255), -- URL ou chemin
+    image BLOB not null, -- URL ou chemin
     date_publication TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     statut ENUM('en vente', 'vendu') DEFAULT 'en vente',
 

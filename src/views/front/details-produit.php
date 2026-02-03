@@ -1,11 +1,4 @@
-<?php 
-include '../partials/header.php'; 
-
-
-$id_produit = $_GET['id'] ?? null;
-
-
-?>
+<!-- PHP block commented out: header include and product id handling removed -->
 
 <div class="container my-5">
     <div class="row">
@@ -37,6 +30,4 @@ $id_produit = $_GET['id'] ?? null;
     </div>
 </div>
 
-<?php 
-include '../partials/footer.php'; 
-?>
+<!-- PHP include footer commented out -->

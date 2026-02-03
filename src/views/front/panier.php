@@ -1,6 +1,4 @@
-<?php 
-include '../partials/header.php'; 
-?>
+<!-- PHP include header commented out -->
 
 <div class="container my-5">
     <h1 class="mb-5">Mon Panier</h1>
@@ -112,6 +110,4 @@ include '../partials/header.php';
     </div>
 </div>
 
-<?php 
-include '../partials/footer.php'; 
-?>
+<!-- PHP include footer commented out -->

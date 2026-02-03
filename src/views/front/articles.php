@@ -1,5 +1,7 @@
-<?php 
-include '../partials/header.php'; 
+<?php
+// Vue : liste des articles
+// Inclusion du header (menu, CSS commun)
+include '../partials/header.php';
 ?>
 
 <div class="container my-5">
@@ -41,6 +43,7 @@ include '../partials/header.php';
         </div>
 </div>
 
-<?php 
-include '../partials/footer.php'; 
+<?php
+// Inclusion du footer (scripts, informations de bas de page)
+include '../partials/footer.php';
 ?>

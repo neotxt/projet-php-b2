@@ -1,5 +1,5 @@
-<?php 
-include '../partials/header.php'; 
+<?php
+include '../partials/header.php';
 ?>
 
 <div class="container my-5">
@@ -22,6 +22,7 @@ include '../partials/header.php';
     </div>
 </div>
 
-<?php 
-include '../partials/footer.php'; 
+<?php
+// Inclusion du footer commun (liens, scripts)
+include '../partials/footer.php';
 ?>

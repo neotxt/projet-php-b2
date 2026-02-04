@@ -18,30 +18,34 @@
             flex: 1; 
         }
     </style>
-
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">LOGO</a>
-            <ul class="navbar-nav ms-auto">
-    <li class="nav-item">
-        <a class="nav-link" href="accueil.php">Accueil</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="articles.php">Articles</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="a-propos.php">Qui sommes-nous ?</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="connexion.php">Connexion / Inscription</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="panier.php">Panier</a>
-    </li>
-</ul>
- </div>
-    </nav>
+            <a class="navbar-brand fw-bold" href="accueil.php">LOGO</a>
 
-   
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="accueil.php">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="articles.php">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="a-propos.php">Qui sommes-nous ?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="connexion.php">Connexion / Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="panier.php">Panier</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

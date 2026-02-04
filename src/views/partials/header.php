@@ -40,10 +40,26 @@
                         <a class="nav-link" href="a-propos.php">Qui sommes-nous ?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="connexion.php">Connexion / Inscription</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="panier.php">Panier</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <!-- affichage du profil de l'utilisateur en haut a droite de la page -->
+                        <?php if (!empty($_SESSION['user_email'])): 
+                            $initials = strtoupper(substr($_SESSION['user_email'], 0, 2)); ?>
+                            <a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display:inline-block;">
+                                <span class="d-inline-block rounded-circle bg-primary text-white text-center" style="width:40px; height:40px; line-height:40px; font-weight:bold; font-size:1.1rem;">
+                                    <?= htmlspecialchars($initials) ?>
+                                </span>
+                            </a>
+                            <!-- menu de déconnexion -->
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><span class="dropdown-item-text small text-muted"><?= htmlspecialchars($_SESSION['user_email']) ?></span></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/projet-php-b2/src/controllers/logout.php">Déconnexion</a></li>
+                            </ul>
+                        <?php else: ?>
+                            <a class="nav-link" href="connexion.php">Connexion / Inscription</a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </div>

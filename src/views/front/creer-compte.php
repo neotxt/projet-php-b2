@@ -11,6 +11,7 @@ include __DIR__ . '/../partials/header.php';
         <div class="col-md-6">
             <h2 class="text-center mb-4">Créer un compte</h2>
 
+                <!-- affiche le message d'erreur -->
             <?php if (!empty($_SESSION['error'])): ?>
                 <div class="alert alert-danger">
                     <?= $_SESSION['error']; unset($_SESSION['error']); ?>

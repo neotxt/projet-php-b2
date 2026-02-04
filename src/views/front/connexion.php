@@ -10,9 +10,17 @@ include __DIR__ . '/../partials/header.php';
         <div class="col-md-6">
             <h2 class="text-center mb-4">Connexion</h2>
 
+            <!-- affiche le message de succès après l'inscription -->
             <?php if (!empty($_SESSION['register_success'])): ?>
                 <div class="alert alert-success">
                     <?= $_SESSION['register_success']; unset($_SESSION['register_success']); ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- affiche le message d'erreur -->
+            <?php if (!empty($_SESSION['error'])): ?>
+                <div class="alert alert-danger">
+                    <?= $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
             <?php endif; ?>
 

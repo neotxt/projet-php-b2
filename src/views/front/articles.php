@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Vue : liste des articles
 // Inclusion du header (menu, CSS commun)
 include '../partials/header.php';

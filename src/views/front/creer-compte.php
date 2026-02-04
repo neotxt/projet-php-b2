@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include __DIR__ . 'src/views/partials/header.php';
+include __DIR__ . '/../partials/header.php';
 ?>
 
 <div class="container my-5">

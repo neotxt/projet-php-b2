@@ -9,6 +9,9 @@ use Models\User;
 
 use Exception;
 
+/**
+ * Gère la logique métier des utilisateurs. (inscription, connexion)
+ */
 class UserService
 {
     private UserRepository $userRepository;
@@ -23,13 +26,19 @@ class UserService
 
     }
 
+    /**
+     * Traite l'inscription d'un nouvel utilisateur.
+     * @param array $userData
+     * @throws Exception
+     * @return void
+     */
     public function userRegister(array $userData): void
     {
         $userData = array_map('trim', $userData);
 
         $this->userRegistrationValidator->validateRegistration($userData);
 
-        if ($this->userRepository->getEmail($userData['email'])) {
+        if ($this->userRepository->emailExists($userData['email'])) {
             throw new Exception("Cet email est déjà utilisé");
         }
 
@@ -51,7 +60,13 @@ class UserService
         }
     }
 
-    public function userConnexion(array $userData)
+    /**
+     * Vérifie les identifiants de connexion d'un utilisateur.
+     * @param array $userData
+     * @throws Exception
+     * @return array
+     */
+    public function userConnexion(array $userData): array
     {
         $userData = array_map('trim', $userData);
 

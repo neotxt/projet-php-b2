@@ -5,6 +5,11 @@ namespace Controllers;
 use Services\UserService;
 use Exception;
 
+/**
+ * Contrôleur gérant les actions liés aux utilisateurs.
+ * Il s'occuppe de la réception des formulaires, les traite grâce au Service
+ * Et gère les redirections.
+ */
 class UserController
 {
     private UserService $userService;
@@ -16,10 +21,14 @@ class UserController
 
 
     /**
-     * Ouais ça créé un utilisateur
+     * Traite la soumission du formulaire d'inscription
+     * 
+     * Vérifie la méthode POST, appelle le service d'inscription
+     * Succès: Redirige vers la page de connexion.
+     * Refus: Donne l'erreur.
      * @return never
      */
-    public function createUser()
+    public function createUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: index.php?page=creer-compte');
@@ -38,7 +47,15 @@ class UserController
         }
     }
 
-    public function connexionUser()
+    /**
+     * Traite la soumission au formulaire de connexion.
+     *
+     * Appelle le service de connexion pour vérifier les identifiants.
+     * Succès: Remplit la SESSION et redirige vers l'écran d'accueil.
+     * Refus: Donne l'erreur.
+     * @return void
+     */
+    public function connexionUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: index.php?page=connexion');
@@ -60,6 +77,11 @@ class UserController
         }
     }
 
+    /**
+     * Déconnecte l'utilisateur.
+     * Vide la session, supprime les cookies et redirigé vers la page de connexion.
+     * @return never
+     */
     public function logoutUser()
     {
         $_SESSION = [];

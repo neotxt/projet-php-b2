@@ -4,8 +4,16 @@ namespace Validators;
 
 use Exception;
 
+/**
+ * Valide les informations données lors de l'inscription d'un utilisateur.
+ */
 class UserRegistrationValidator
 {
+    /**
+     * Centralise les différentes validations.
+     * @param array $userData
+     * @return void
+     */
     public function validateRegistration(array $userData): void
     {
         $this->validateRequiredFields($userData);
@@ -13,6 +21,12 @@ class UserRegistrationValidator
         $this->validatePassword($userData['password'], $userData['confirmPassword']);
     }
 
+    /**
+     * Vérifie que toutes les informations sont données.
+     * @param array $userData
+     * @throws Exception
+     * @return void
+     */
     private function validateRequiredFields(array $userData): void
     {
         if (
@@ -26,6 +40,12 @@ class UserRegistrationValidator
         }
     }
 
+    /**
+     * Vérifie que l'email donné est dans le bon format.
+     * @param string $email
+     * @throws Exception
+     * @return void
+     */
     private function validateEmail(string $email): void
     {
         $cleanEmail = trim($email);
@@ -35,12 +55,24 @@ class UserRegistrationValidator
         }
     }
 
+    /**
+     * Centralise les validations des mots de passe.
+     * @param string $password
+     * @param string $confirmPassword
+     * @return void
+     */
     private function validatePassword(string $password, string $confirmPassword): void
     {
         $this->validatePasswordStrength($password);
         $this->validateSamePassword($password, $confirmPassword);
     }
 
+    /**
+     * Vérifie si le mot de passe est assez compliqué
+     * @param string $password
+     * @throws Exception
+     * @return void
+     */
     private function validatePasswordStrength(string $password): void
     {
         if (
@@ -54,6 +86,13 @@ class UserRegistrationValidator
         }
     }
 
+    /**
+     * Vérifie que le mot de passe de confirmation correspond au mot de passe donné.
+     * @param string $password
+     * @param string $confirmPassword
+     * @throws Exception
+     * @return void
+     */
     private function validateSamePassword(string $password, string $confirmPassword): void
     {
         if ($password !== $confirmPassword) {

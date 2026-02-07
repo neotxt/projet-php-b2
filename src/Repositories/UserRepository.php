@@ -4,12 +4,13 @@ namespace Repositories;
 
 use PDO;
 
-/*
- * Classe implémentant Repository, permettant de mettre à jour les utilisateurs dans la BDD
+/**
+ * Gère les requêtes SQL avec la table "users" de la base de données.
+ * @implements Repository
  */
 class UserRepository implements Repository
 {
-    private $db;
+    private PDO $db;
 
     public function __construct(PDO $pdo)
     {
@@ -17,7 +18,11 @@ class UserRepository implements Repository
     }
 
 
-    // Créer un nouveau user dans la bdd
+    /**
+     * Enregistre un nouvel utilisateur dans la base de données.
+     * @param object $user
+     * @return bool
+     */
     public function create(object $user): bool
     {
         $sql = "INSERT INTO users (nom, prenom, email, password)
@@ -48,6 +53,10 @@ class UserRepository implements Repository
         // Supprime un utilisateur dans la bdd
     }
 
+    /**
+     * Cherche un utilisateur par rapport à son adresse mail.
+     * @param string $email
+     */
     public function readByEmail(string $email)
     {
         $sql = 'SELECT id, email, password FROM Users WHERE email = :email';
@@ -57,7 +66,12 @@ class UserRepository implements Repository
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getEmail(string $email): bool
+    /**
+     * Cherche si l'adresse email existe.
+     * @param string $email
+     * @return bool
+     */
+    public function emailExists(string $email): bool
     {
         $sql = 'SELECT id FROM Users WHERE email = :email';
         $query = $this->db->prepare($sql);

@@ -2,7 +2,7 @@
 
 namespace Repositories;
 
-/*
+/**
  * Interface implémentée dans tous les repositories, vont permettre de faire de requêtes SQL à la bdd
  */
 interface Repository

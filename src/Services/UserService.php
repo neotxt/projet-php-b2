@@ -51,7 +51,7 @@ class UserService
         }
     }
 
-    public function userConnexion(array $userData): void
+    public function userConnexion(array $userData)
     {
         $userData = array_map('trim', $userData);
 
@@ -60,8 +60,7 @@ class UserService
         $user = $this->userRepository->readByEmail($userData['email']);
 
         if ($user && password_verify($userData['password'], $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = $user['email'];
+            return $user;
         } else {
             throw new Exception("Email ou mot de passe incorrect.");
         }

@@ -7,7 +7,7 @@ include_once 'src/views/partials/header.php';
 
         <div class="col-12 col-md-6">
             <div class="bg-light rounded p-4 p-md-5 text-center shadow-sm">
-                <img src="../../public/img/banniere.jpg" class="img-fluid rounded" alt="Produit">
+                <img src="src/public/img/banniere.jpg" class="img-fluid rounded" alt="Produit">
                 <p class="mt-3 text-muted d-md-none">L'image du produit</p>
             </div>
         </div>
@@ -15,7 +15,7 @@ include_once 'src/views/partials/header.php';
         <div class="col-12 col-md-6">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="articles.php"
+                    <li class="breadcrumb-item"><a href="index.php?page=articles"
                             class="text-decoration-none text-dark">Articles</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Détails</li>
                 </ol>

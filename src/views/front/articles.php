@@ -15,7 +15,7 @@ include_once 'src/views/partials/header.php';
                 <div class="card-body text-center p-2 p-md-3">
                     <h5 class="card-title fs-6 fs-md-5">Article Mode 1</h5>
                     <p class="card-text text-primary fw-bold mb-2">29,99 €</p>
-                    <a href="details-produit.php?id=1" class="btn btn-dark btn-sm w-100">Détails</a>
+                    <a href="index.php?page=details-produit&id=1" class="btn btn-dark btn-sm w-100">Détails</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@ include_once 'src/views/partials/header.php';
                 <div class="card-body text-center p-2 p-md-3">
                     <h5 class="card-title fs-6 fs-md-5">Article Mode 2</h5>
                     <p class="card-text text-primary fw-bold mb-2">39,99 €</p>
-                    <a href="details-produit.php?id=2" class="btn btn-dark btn-sm w-100">Détails</a>
+                    <a href="index.php?page=details-produit&id=2" class="btn btn-dark btn-sm w-100">Détails</a>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ include_once 'src/views/partials/header.php';
                 <div class="card-body text-center p-2 p-md-3">
                     <h5 class="card-title fs-6 fs-md-5">Article Mode 3</h5>
                     <p class="card-text text-primary fw-bold mb-2">19,99 €</p>
-                    <a href="details-produit.php?id=3" class="btn btn-dark btn-sm w-100">Détails</a>
+                    <a href="index.php?page=details-produit&id=3" class="btn btn-dark btn-sm w-100">Détails</a>
                 </div>
             </div>
         </div>

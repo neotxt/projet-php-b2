@@ -46,7 +46,11 @@ class UserController
         }
 
         try {
-            $this->userService->userConnexion($_POST);
+            $user = $this->userService->userConnexion($_POST);
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_email'] = $user['email'];
+
             header('Location: index.php?page=accueil');
             exit();
         } catch (Exception $e) {

@@ -1,8 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-include '../partials/header.php';
+include_once 'src/views/partials/header.php';
 ?>
 
 <div class="container my-5">
@@ -25,7 +22,9 @@ include '../partials/header.php';
                         <tr>
                             <td class="ps-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="https://via.placeholder.com/80" class="img-fluid rounded me-3 border shadow-sm" style="width: 60px; height: 60px; object-fit: cover;" alt="T-shirt">
+                                    <img src="https://via.placeholder.com/80"
+                                        class="img-fluid rounded me-3 border shadow-sm"
+                                        style="width: 60px; height: 60px; object-fit: cover;" alt="T-shirt">
                                     <div>
                                         <h6 class="mb-0 fw-bold">T-shirt en Coton Bio</h6>
                                         <small class="text-muted d-none d-md-block">Taille: M, Couleur: Blanc</small>
@@ -39,8 +38,10 @@ include '../partials/header.php';
                             <td class="fw-bold">25,00 €</td>
                             <td class="text-end pe-3">
                                 <button class="btn btn-sm btn-outline-danger border-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                                     </svg>
                                 </button>
                             </td>
@@ -48,7 +49,9 @@ include '../partials/header.php';
                         <tr>
                             <td class="ps-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="https://via.placeholder.com/80" class="img-fluid rounded me-3 border shadow-sm" style="width: 60px; height: 60px; object-fit: cover;" alt="Jean">
+                                    <img src="https://via.placeholder.com/80"
+                                        class="img-fluid rounded me-3 border shadow-sm"
+                                        style="width: 60px; height: 60px; object-fit: cover;" alt="Jean">
                                     <div>
                                         <h6 class="mb-0 fw-bold">Jean Slim Bleu</h6>
                                         <small class="text-muted d-none d-md-block">Taille: 40</small>
@@ -62,8 +65,10 @@ include '../partials/header.php';
                             <td class="fw-bold">49,98 €</td>
                             <td class="text-end pe-3">
                                 <button class="btn btn-sm btn-outline-danger border-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                                     </svg>
                                 </button>
                             </td>
@@ -71,7 +76,7 @@ include '../partials/header.php';
                     </tbody>
                 </table>
             </div>
-             <div class="mt-4 text-center text-md-start">
+            <div class="mt-4 text-center text-md-start">
                 <a href="articles.php" class="btn btn-link text-decoration-none text-muted p-0">
                     ← Continuer mes achats
                 </a>
@@ -82,7 +87,7 @@ include '../partials/header.php';
             <div class="card border-0 shadow-sm rounded-3 bg-light">
                 <div class="card-body p-4">
                     <h5 class="card-title mb-4 fw-bold">Résumé de la commande</h5>
-                    
+
                     <div class="d-flex justify-content-between mb-2 text-muted">
                         <span>Sous-total HT</span>
                         <span>74,98 €</span>
@@ -92,12 +97,12 @@ include '../partials/header.php';
                         <span>15,00 €</span>
                     </div>
                     <div class="d-flex justify-content-between mb-4 text-muted">
-                         <span>Livraison</span>
-                         <span class="text-success fw-bold">Offerte</span>
+                        <span>Livraison</span>
+                        <span class="text-success fw-bold">Offerte</span>
                     </div>
-                    
+
                     <hr class="my-4">
-                    
+
                     <div class="d-flex justify-content-between mb-4">
                         <span class="fw-bold fs-5">Total TTC</span>
                         <span class="fw-bold fs-4 text-primary">89,98 €</span>
@@ -117,5 +122,5 @@ include '../partials/header.php';
 </div>
 
 <?php
-include '../partials/footer.php';
+include_once 'src/views/partials/footer.php';
 ?>

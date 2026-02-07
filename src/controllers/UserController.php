@@ -1,0 +1,58 @@
+<?php
+
+namespace Controllers;
+
+use Services\UserService;
+use Exception;
+
+class UserController
+{
+    private UserService $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+
+    /**
+     * Ouais ça créé un utilisateur
+     * @return never
+     */
+    public function createUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?page=creer-compte');
+            exit();
+        }
+
+        try {
+            $this->userService->userRegister($_POST);
+            $_SESSION['register_success'] = "Compte créé avec succès. Connectez-vous.";
+            header('Location: index.php?page=connexion');
+            exit();
+        } catch (Exception $e) {
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: index.php?page=creer-compte');
+            exit();
+        }
+    }
+
+    public function connexionUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?page=connexion');
+            exit();
+        }
+
+        try {
+            $this->userService->userConnexion($_POST);
+            header('Location: index.php?page=accueil');
+            exit();
+        } catch (Exception $e) {
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: index.php?page=connexion');
+            exit();
+        }
+    }
+}

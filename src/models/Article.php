@@ -37,3 +37,4 @@ class Article
         return $this->imagePath;
     }
 }
+   

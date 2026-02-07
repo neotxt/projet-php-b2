@@ -64,8 +64,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item"
-                                        href="/projet-php-b2/src/controllers/logout.php">Déconnexion</a></li>
+                                <li><a class="dropdown-item" href="index.php?action=logout">Déconnexion</a></li>
                             </ul>
                         <?php else: ?>
                             <a class="nav-link" href="index.php?page=connexion">Connexion / Inscription</a>

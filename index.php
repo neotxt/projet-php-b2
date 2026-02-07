@@ -43,6 +43,9 @@ if ($action) {
             exit();
         default:
             exit();
+        case 'logout':
+            $userController->logoutUser();
+            exit();
     }
 }
 

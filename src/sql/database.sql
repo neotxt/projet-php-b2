@@ -86,3 +86,9 @@ ADD FOREIGN KEY (id_order) REFERENCES Orders(id) ON DELETE CASCADE;
 
 -- Insérer les rôles possibles
 INSERT INTO Roles (role_name) VALUES ('acheteur'), ('vendeur');
+
+
+INSERT INTO Vetements (id_vendeur, titre, description, prix, categorie, taille, marque, etat, image) VALUES
+(1, 'Jean slim', 'Jean coupe slim bleu', 10.99, 'pantalon', 'M', 'Levi\'s', 'bon état', 'https://tse3.mm.bing.net/th/id/OIP._W2bBZPojv_7wUhRHOTTCAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3'),
+(1, 'Pantalon cargo', 'Pantalon cargo beige', 15.99, 'pantalon', 'L', 'H&M', 'très bon état', 'https://media.atlasformen.com/webmedia/1080by1242/be/e2/44/bee24439ed128eaadb7db412d9a855ae.jpg?w=1200'),
+(1, 'Jogging noir', 'Jogging noir confortable', 12.99, 'pantalon', 'S', 'Nike', 'bon état', 'https://tse4.mm.bing.net/th/id/OIP.63i-viB86CMhEcRIM1IQUwHaJ3?rs=1&pid=ImgDetMain&o=7&rm=3');

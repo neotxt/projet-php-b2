@@ -1,7 +1,12 @@
+
 <?php
 // Vue : liste des articles
-// Inclusion du header (menu, CSS commun)
 include_once 'src/views/partials/header.php';
+require_once __DIR__ . '/../../Repositories/ArticleRepository.php';
+
+// Récupérer tous les vêtements depuis la BDD
+$repo = new \Repositories\ArticleRepository();
+$articles = $repo->getAll();
 ?>
 
 <style>
@@ -115,43 +120,20 @@ include_once 'src/views/partials/header.php';
 
         <div class="col-lg-9">
             <div class="row g-3 g-md-4">
-
+                <?php // Boucle sur tous les vêtements récupérés depuis la base de données
+                foreach ($articles as $article): ?>
                 <div class="col-6 col-md-4 mb-4">
-                    <a href="index.php?page=details-produit&id=1" class="product-link">
+                    <a href="index.php?page=details-produit&id=<?= $article['id'] ?>" class="product-link">
                         <div class="card h-100 shadow-sm product-card rounded-4">
-                            <img src="src/public/img/banniere.jpg" class="card-img-top img-fluid" alt="Produit">
+                            <img src="<?= htmlspecialchars($article['image']) ?>" class="card-img-top img-fluid" alt="<?= htmlspecialchars($article['titre']) ?>">
                             <div class="card-body text-center p-3">
-                                <h6 class="fw-bold mb-1">Article Mode 1</h6>
-                                <p class="mb-0 fw-bold" style="color: var(--gold-accent);">29,99 €</p>
+                                <h6 class="fw-bold mb-1"><?= htmlspecialchars($article['titre']) ?></h6>
+                                <p class="mb-0 fw-bold" style="color: var(--gold-accent);"><?= number_format($article['prix'], 2, ',', ' ') ?> €</p>
                             </div>
                         </div>
                     </a>
                 </div>
-
-                <div class="col-6 col-md-4 mb-4">
-                    <a href="index.php?page=details-produit&id=2" class="product-link">
-                        <div class="card h-100 shadow-sm product-card rounded-4">
-                            <img src="src/public/img/banniere.jpg" class="card-img-top img-fluid" alt="Produit">
-                            <div class="card-body text-center p-3">
-                                <h6 class="fw-bold mb-1">Article Mode 2</h6>
-                                <p class="mb-0 fw-bold" style="color: var(--gold-accent);">39,99 €</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-4 mb-4">
-                    <a href="index.php?page=details-produit&id=3" class="product-link">
-                        <div class="card h-100 shadow-sm product-card rounded-4">
-                            <img src="src/public/img/banniere.jpg" class="card-img-top img-fluid" alt="Produit">
-                            <div class="card-body text-center p-3">
-                                <h6 class="fw-bold mb-1">Article Mode 3</h6>
-                                <p class="mb-0 fw-bold" style="color: var(--gold-accent);">19,99 €</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

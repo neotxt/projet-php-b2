@@ -8,8 +8,18 @@ use PDO;
  * Gère les requêtes SQL avec la table "users" de la base de données.
  * @implements Repository
  */
-class UserRepository implements Repository
-{
+class UserRepository implements Repository {
+    /**
+     * Récupère tous les utilisateurs depuis la base de données
+     * @return array Liste des utilisateurs
+     */
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM Users';
+        $query = $this->db->query($sql);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     private PDO $db;
 
     public function __construct(PDO $pdo)

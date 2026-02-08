@@ -53,6 +53,9 @@ switch ($page) {
     case 'creer-compte':
         include_once 'src/views/front/creer-compte.php';
         break;
+    case 'details-produit':
+        include_once 'src/views/front/details-produit.php';
+        break;
     case 'connexion':
         include_once 'src/views/front/connexion.php';
         break;

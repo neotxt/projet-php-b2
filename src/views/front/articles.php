@@ -5,7 +5,8 @@ include_once 'src/views/partials/header.php';
 require_once __DIR__ . '/../../models/Article.php';
 
 // Récupérer tous les vêtements depuis la BDD
-$articles = \Models\getArticles::getAll();
+$repo = new \Repositories\ArticleRepository();
+$articles = $repo->getAll();
 ?>
 
 <div class="container my-5">

@@ -11,4 +11,5 @@ interface Repository
     public function read(int $id);
     public function update(object $entity);
     public function delete(int $id);
+    public function getAll();
 }

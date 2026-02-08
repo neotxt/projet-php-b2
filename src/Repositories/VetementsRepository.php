@@ -64,6 +64,27 @@ class VetementsRepository implements Repository
         }
     }
 
+    /**
+     * Récupère tous les vêtements
+     *
+     * @return array
+     */
+    public function getAll(): array
+    {
+        try {
+            $sql = "SELECT id, titre AS nom, description, image, prix, categorie, taille, marque, etat, statut
+                    FROM Vetements
+                    ORDER BY date_publication DESC";
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
     // Méthodes minimales pour respecter l'interface Repository
     public function create(object $vetement)
     {

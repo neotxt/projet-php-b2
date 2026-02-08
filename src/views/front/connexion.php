@@ -2,6 +2,17 @@
 include_once 'src/views/partials/header.php';
 ?>
 
+<style>
+ body {
+        background-color: var(--cream-bg) !important;
+    }
+
+    .custom-card {
+        background-color: var(--cream-bg) !important;
+        color: var(--forest-green) !important;
+    }
+</style>
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-6">

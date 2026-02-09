@@ -52,10 +52,10 @@ if ($action) {
         case 'submit_connexion':
             $userController->connexionUser();
             exit();
-        default:
-            exit();
         case 'logout':
             $userController->logoutUser();
+            exit();
+        default:
             exit();
     }
 }

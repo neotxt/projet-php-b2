@@ -2,18 +2,16 @@
 
 namespace Repositories;
 
+use PDO;
+use Models\Article;
+
 class ArticleRepository implements Repository
 {
-    // Connexion PDO à la base de données
-    private $conn;
+    private PDO $db;
 
-    public function __construct($db = null)
+    public function __construct(PDO $pdo)
     {
-        // Réutilise la connexion Database ou en crée une nouvelle
-        if ($db === null) {
-            $db = new \Config\Database();
-        }
-        $this->conn = $db->getConnection();
+        $this->db = $pdo;
     }
 
     public function create(object $article)
@@ -23,21 +21,41 @@ class ArticleRepository implements Repository
 
     public function read(int $id)
     {
-        // Prépare la requête SQL pour obtenir le vêtement par son id
-        $stmt = $this->conn->prepare('SELECT * FROM Vetements WHERE id = ?');
-        // Exécute la requête avec l'id fourni
-        $stmt->execute([$id]);
-        // Récupère le résultat sous forme de tableau associatif
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        return $result ? $result : null;
+
+        $sql = 'SELECT * FROM Vetements WHERE id = :id';
+        $query = $this->db->prepare($sql);
+        $query->execute(['id' => $id]);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getAll()
     {
-        // Exécute la requête SQL pour obtenir tous les vêtements
-        $stmt = $this->conn->query('SELECT * FROM Vetements');
-        // Retourne tous les résultats sous forme de tableau associatif
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $articlesData = $this->fetchAllArticles();
+
+        return $this->createArticleObjects($articlesData);
+    }
+
+    private function fetchAllArticles()
+    {
+        $sql = 'SELECT * FROM Vetements';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    private function createArticleObjects(array $articlesData)
+    {
+        $articleObjects = [];
+        foreach ($articlesData as $article) {
+            $articleObjects[] = new Article(
+                $article['id'],
+                $article['titre'],
+                $article['prix'],
+                $article['description'],
+                $article['image']
+            );
+        }
+        return $articleObjects;
     }
 
     public function update(object $article)

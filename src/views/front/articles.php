@@ -1,12 +1,6 @@
-
 <?php
 // Vue : liste des articles
 include_once 'src/views/partials/header.php';
-require_once __DIR__ . '/../../Repositories/ArticleRepository.php';
-
-// Récupérer tous les vêtements depuis la BDD
-$repo = new \Repositories\ArticleRepository();
-$articles = $repo->getAll();
 ?>
 
 <style>
@@ -56,11 +50,11 @@ $articles = $repo->getAll();
     }
 
     .product-link:hover .product-card {
-        shadow: 0 10px 20px rgba(0,0,0,0.1);
+        shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
     /* Personnalisation des boutons de taille */
-    .btn-check:checked + .btn-outline-dark {
+    .btn-check:checked+.btn-outline-dark {
         background-color: var(--forest-green);
         color: #fff;
         border-color: var(--forest-green);
@@ -120,19 +114,22 @@ $articles = $repo->getAll();
 
         <div class="col-lg-9">
             <div class="row g-3 g-md-4">
-                <?php // Boucle sur tous les vêtements récupérés depuis la base de données
+                <?php // Changement dans la manière de récupérer les données, on va maintenant passer par les getters du model Article
                 foreach ($articles as $article): ?>
-                <div class="col-6 col-md-4 mb-4">
-                    <a href="index.php?page=details-produit&id=<?= $article['id'] ?>" class="product-link">
-                        <div class="card h-100 shadow-sm product-card rounded-4">
-                            <img src="<?= htmlspecialchars($article['image']) ?>" class="card-img-top img-fluid" alt="<?= htmlspecialchars($article['titre']) ?>">
-                            <div class="card-body text-center p-3">
-                                <h6 class="fw-bold mb-1"><?= htmlspecialchars($article['titre']) ?></h6>
-                                <p class="mb-0 fw-bold" style="color: var(--gold-accent);"><?= number_format($article['prix'], 2, ',', ' ') ?> €</p>
+                    <div class="col-6 col-md-4 mb-4">
+                        <a href="index.php?page=details-produit&id=<?= $article->getId() ?>" class="product-link">
+                            <div class="card h-100 shadow-sm product-card rounded-4">
+                                <img src="<?= htmlspecialchars($article->getImagePath) ?>" class="card-img-top img-fluid"
+                                    alt="<?= htmlspecialchars($article->getTitle()) ?>">
+                                <div class="card-body text-center p-3">
+                                    <h6 class="fw-bold mb-1"><?= htmlspecialchars($article->getTitle()) ?></h6>
+                                    <p class="mb-0 fw-bold" style="color: var(--gold-accent);">
+                                        <?= number_format($article->getPrice(), 2, ',', ' ') ?> €
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>

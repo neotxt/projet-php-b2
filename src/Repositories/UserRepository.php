@@ -8,17 +8,8 @@ use PDO;
  * Gère les requêtes SQL avec la table "users" de la base de données.
  * @implements Repository
  */
-class UserRepository implements Repository {
-    /**
-     * Récupère tous les utilisateurs depuis la base de données
-     * @return array Liste des utilisateurs
-     */
-    public function getAll()
-    {
-        $sql = 'SELECT * FROM Users';
-        $query = $this->db->query($sql);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
+class UserRepository implements Repository
+{
 
     private PDO $db;
 
@@ -77,6 +68,17 @@ class UserRepository implements Repository {
     }
 
     /**
+     * Récupère tous les utilisateurs depuis la base de données
+     * @return array Liste des utilisateurs
+     */
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM Users';
+        $query = $this->db->query($sql);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Cherche si l'adresse email existe.
      * @param string $email
      * @return bool
@@ -89,4 +91,5 @@ class UserRepository implements Repository {
 
         return (bool) $query->fetch();
     }
+
 }

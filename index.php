@@ -14,11 +14,18 @@ spl_autoload_register(function ($class) {
 });
 
 use Config\Database;
+
 use Repositories\UserRepository;
+use Repositories\ArticleRepository;
+
 use Validators\UserRegistrationValidator;
 use Validators\UserConnexionValidator;
+
 use Services\UserService;
+use Services\ArticleService;
+
 use Controllers\UserController;
+use Controllers\ArticleController;
 
 session_start();
 
@@ -29,6 +36,10 @@ $userRegistrationValidator = new UserRegistrationValidator();
 $userConnexionValidator = new UserConnexionValidator();
 $userService = new UserService($userRepository, $userRegistrationValidator, $userConnexionValidator);
 $userController = new UserController($userService);
+
+$articleRepository = new ArticleRepository($database->getConnection());
+$articleService = new ArticleService($articleRepository);
+$articleController = new ArticleController($articleService);
 
 $page = $_GET['page'] ?? 'accueil';
 $action = $_GET['action'] ?? '';
@@ -60,7 +71,7 @@ switch ($page) {
         include_once 'src/views/front/connexion.php';
         break;
     case 'articles':
-        include_once 'src/views/front/articles.php';
+        $articleController->listAllArticles();
         break;
     case 'a-propos':
         include_once 'src/views/front/a-propos.php';

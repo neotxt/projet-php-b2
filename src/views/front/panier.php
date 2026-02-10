@@ -3,12 +3,38 @@ include_once 'src/views/partials/header.php';
 ?>
 
 <style>
- body {
+    :root {
+        --forest-green: #1a3020;
+        --cream-bg: #f9f7f2;
+        --gold-accent: #c4a47c;
+    }
+
+    body {
         background-color: var(--cream-bg) !important;
     }
 
     .custom-card {
         background-color: var(--cream-bg) !important;
+        color: var(--forest-green) !important;
+    }
+
+    /* Style personnalisé pour le bouton de paiement */
+    .btn-checkout {
+        background-color: var(--forest-green) !important;
+        border-color: var(--forest-green) !important;
+        color: #ffffff !important;
+        transition: all 0.3s ease;
+    }
+
+    /* Effet doré au survol comme sur le header/footer */
+    .btn-checkout:hover {
+        background-color: var(--gold-accent) !important;
+        border-color: var(--gold-accent) !important;
+        transform: translateY(-2px);
+    }
+
+    /* Harmonisation de la couleur du prix total */
+    .text-total {
         color: var(--forest-green) !important;
     }
 </style>
@@ -18,7 +44,7 @@ include_once 'src/views/partials/header.php';
 
     <div class="row g-4 g-lg-5">
         <div class="col-12 col-lg-8">
-            <div class="table-responsive shadow-sm rounded border">
+            <div class="table-responsive shadow-sm rounded border bg-white">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
@@ -95,7 +121,7 @@ include_once 'src/views/partials/header.php';
         </div>
 
         <div class="col-12 col-lg-4">
-            <div class="card border-0 shadow-sm rounded-3 bg-light">
+            <div class="card border-0 shadow-sm rounded-3 bg-white">
                 <div class="card-body p-4">
                     <h5 class="card-title mb-4 fw-bold">Résumé de la commande</h5>
 
@@ -116,10 +142,10 @@ include_once 'src/views/partials/header.php';
 
                     <div class="d-flex justify-content-between mb-4">
                         <span class="fw-bold fs-5">Total TTC</span>
-                        <span class="fw-bold fs-4 text-primary">89,98 €</span>
+                        <span class="fw-bold fs-4 text-total">89,98 €</span>
                     </div>
 
-                    <button class="btn btn-primary btn-lg w-100 py-3 fw-bold rounded-3 shadow">
+                    <button class="btn btn-checkout btn-lg w-100 py-3 fw-bold rounded-3 shadow-sm">
                         Passer au paiement
                     </button>
 

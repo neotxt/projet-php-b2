@@ -24,21 +24,6 @@ include_once 'src/views/partials/header.php';
         justify-content: center;
     }
 
-    .filter-card {
-        background-color: #ffffff !important;
-        color: var(--forest-green) !important;
-    }
-
-    .filter-title {
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 0.85rem;
-        margin-bottom: 1.2rem;
-        border-bottom: 1px solid rgba(26, 48, 32, 0.1);
-        padding-bottom: 0.5rem;
-    }
-
     .product-link {
         text-decoration: none !important;
         color: inherit !important;

@@ -82,6 +82,9 @@ switch ($page) {
     case 'a-propos':
         $pageController->displayAPropos();
         break;
+    case 'vente':
+        include_once 'src/views/front/vente.php';
+        break;
     case 'accueil':
     default:
         $pageController->displayAccueil();

@@ -102,4 +102,14 @@ class UserController
         header('Location: index.php?page=connexion');
         exit();
     }
+
+    public function displayConnexion()
+    {
+        require_once 'src/views/front/connexion.php';
+    }
+
+    public function displayCreerCompte()
+    {
+        require_once 'src/views/front/creer-compte.php';
+    }
 }

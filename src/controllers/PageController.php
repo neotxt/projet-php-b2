@@ -1,0 +1,33 @@
+<?php
+
+namespace Controllers;
+
+use Services\ArticleService;
+use Services\UserService;
+
+class PageController
+{
+    private ArticleService $articleService;
+    private UserService $userService;
+
+    public function __construct(ArticleService $articleService, UserService $userService)
+    {
+        $this->articleService = $articleService;
+        $this->userService = $userService;
+    }
+
+    public function displayAccueil()
+    {
+        require_once 'src/views/front/accueil.php';
+    }
+
+    public function displayAPropos()
+    {
+        require_once 'src/views/front/a-propos.php';
+    }
+
+    public function displayPanier()
+    {
+        require_once 'src/views/front/panier.php';
+    }
+}

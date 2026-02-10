@@ -16,7 +16,22 @@ class ArticleRepository implements Repository
 
     public function create(object $article)
     {
-        // Créer un nouvel article dans la bdd
+        $sql = "INSERT INTO Vetements (id_vendeur, titre, description, prix, categorie, taille, marque, etat, image)
+                VALUES (:id_vendeur, :titre, :description, :prix, :categorie, :taille, :marque, :etat, :image)";
+
+        $query = $this->db->prepare($sql);
+
+        return $query->execute([
+            'id_vendeur' => $article->getIdSeller(),
+            'titre' => $article->getTitle(),
+            'description' => $article->getDescription(),
+            'prix' => $article->getPrice(),
+            'categorie' => $article->getCategory(),
+            'taille' => $article->getSize(),
+            'marque' => $article->getMarque(),
+            'etat' => $article->getState(),
+            'image' => $article->getImagePath()
+        ]);
     }
 
     public function read(int $id)
@@ -25,9 +40,22 @@ class ArticleRepository implements Repository
         $sql = 'SELECT * FROM Vetements WHERE id = :id';
         $query = $this->db->prepare($sql);
         $query->execute(['id' => $id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $articleData = $query->fetch(PDO::FETCH_ASSOC);
+        if (!$articleData) {
+            return null;
+        }
+        return $this->dataToArticle($articleData);
     }
 
+    public function update(object $article)
+    {
+        // Met à jour les informations d'un article dans la bdd
+    }
+
+    public function delete(int $id)
+    {
+        // Supprime un article dans la bdd
+    }
     public function getAll()
     {
         $articlesData = $this->fetchAllArticles();
@@ -47,24 +75,25 @@ class ArticleRepository implements Repository
     {
         $articleObjects = [];
         foreach ($articlesData as $article) {
-            $articleObjects[] = new Article(
-                $article['id'],
-                $article['titre'],
-                $article['prix'],
-                $article['description'],
-                $article['image']
-            );
+            $articleObjects[] = $this->dataToArticle($article);
         }
         return $articleObjects;
     }
 
-    public function update(object $article)
+    private function dataToArticle(array $articleData)
     {
-        // Met à jour les informations d'un article dans la bdd
+        return new Article(
+            $articleData['id'],
+            $articleData['id_vendeur'],
+            $articleData['titre'],
+            $articleData['description'],
+            $articleData['prix'],
+            $articleData['categorie'],
+            $articleData['taille'],
+            $articleData['marque'],
+            $articleData['etat'],
+            $articleData['image']
+        );
     }
 
-    public function delete(int $id)
-    {
-        // Supprime un article dans la bdd
-    }
 }

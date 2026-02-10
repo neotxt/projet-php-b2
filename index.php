@@ -26,6 +26,7 @@ use Services\ArticleService;
 
 use Controllers\UserController;
 use Controllers\ArticleController;
+use Controllers\PageController;
 
 session_start();
 
@@ -40,6 +41,8 @@ $userController = new UserController($userService);
 $articleRepository = new ArticleRepository($database->getConnection());
 $articleService = new ArticleService($articleRepository);
 $articleController = new ArticleController($articleService);
+
+$pageController = new PageController($articleService, $userService);
 
 $page = $_GET['page'] ?? 'accueil';
 $action = $_GET['action'] ?? '';
@@ -61,29 +64,29 @@ if ($action) {
 }
 
 switch ($page) {
-    case 'creer-compte':
-        include_once 'src/views/front/creer-compte.php';
-        break;
     case 'details-produit':
-        include_once 'src/views/front/details-produit.php';
-        break;
-    case 'connexion':
-        include_once 'src/views/front/connexion.php';
+        $articleController->viewArticleDetails();
         break;
     case 'articles':
         $articleController->listAllArticles();
         break;
-    case 'a-propos':
-        include_once 'src/views/front/a-propos.php';
+    case 'creer-compte':
+        $userController->displayCreerCompte();
+        break;
+    case 'connexion':
+        $userController->displayConnexion();
         break;
     case 'panier':
-        include_once 'src/views/front/panier.php';
+        $pageController->displayPanier();
+        break;
+    case 'a-propos':
+        $pageController->displayAPropos();
         break;
     case 'vente':
         include_once 'src/views/front/vente.php';
         break;
     case 'accueil':
     default:
-        include_once 'src/views/front/accueil.php';
+        $pageController->displayAccueil();
         break;
 }

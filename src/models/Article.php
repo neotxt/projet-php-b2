@@ -5,17 +5,37 @@ namespace Models;
 class Article
 {
     private int $id;
+    private int $idSeller;
     private string $title;
     private float $price;
     private string $description;
+    private string $category;
+    private string $size;
+    private string $brand;
+    private string $state;
     private string $imagePath;
 
-    public function __construct(int $id, string $title, float $price, string $description, string $imagePath)
-    {
+    public function __construct(
+        int $id,
+        int $idSeller,
+        string $title,
+        string $description,
+        float $price,
+        string $category,
+        string $size,
+        string $brand,
+        string $state,
+        string $imagePath
+    ) {
         $this->id = $id;
+        $this->idSeller = $idSeller;
         $this->title = $title;
-        $this->price = $price;
         $this->description = $description;
+        $this->price = $price;
+        $this->category = $category;
+        $this->size = $size;
+        $this->brand = $brand;
+        $this->state = $state;
         $this->imagePath = $imagePath;
     }
 
@@ -24,9 +44,18 @@ class Article
         return $this->id;
     }
 
-    public function getName(): string
+    public function getIdSeller()
+    {
+        return $this->idSeller;
+    }
+
+    public function getTitle(): string
     {
         return $this->title;
+    }
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     public function getPrice(): float
@@ -34,9 +63,24 @@ class Article
         return $this->price;
     }
 
-    public function getDescription(): string
+    public function getCategory()
     {
-        return $this->description;
+        return $this->category;
+    }
+
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    public function getState()
+    {
+        return $this->state;
     }
 
     public function getImagePath(): string

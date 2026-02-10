@@ -19,8 +19,18 @@ class ArticleService
         $articles = $this->articleRepository->getAll();
 
         if (!$articles) {
-            throw new Exception("Aucun article n'a été trouvé");
+            throw new Exception("Aucun article n'a été trouvé.");
         }
         return $articles;
+    }
+
+    public function getArticleById(int $id)
+    {
+        $article = $this->articleRepository->read($id);
+
+        if (!$article) {
+            throw new Exception("L'article n'a pas été trouvé.");
+        }
+        return $article;
     }
 }

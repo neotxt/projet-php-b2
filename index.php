@@ -79,6 +79,9 @@ switch ($page) {
     case 'panier':
         include_once 'src/views/front/panier.php';
         break;
+    case 'vente':
+        include_once 'src/views/front/vente.php';
+        break;
     case 'accueil':
     default:
         include_once 'src/views/front/accueil.php';

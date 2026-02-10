@@ -11,6 +11,20 @@ include_once 'src/views/partials/header.php';
         background-color: var(--cream-bg) !important;
         color: var(--forest-green) !important;
     }
+
+    /* Style personnalisé pour assortir le bouton au thème Forest & Gold */
+    .btn-custom {
+        background-color: var(--forest-green) !important;
+        border-color: var(--forest-green) !important;
+        color: #ffffff !important;
+        transition: all 0.3s ease;
+    }
+
+    /* Effet doré au survol comme sur le header et le panier */
+    .btn-custom:hover {
+        background-color: var(--gold-accent) !important;
+        border-color: var(--gold-accent) !important;
+    }
 </style>
 
 <div class="container my-5">
@@ -45,7 +59,7 @@ include_once 'src/views/partials/header.php';
                     <input type="password" name="password" class="form-control" required>
                 </div>
 
-                <button class="btn btn-primary w-100">Se connecter</button>
+                <button class="btn btn-custom w-100">Se connecter</button>
             </form>
 
             <p class="text-center mt-3">

@@ -29,9 +29,9 @@ class UserRepository implements Repository
         $sql = "INSERT INTO users (nom, prenom, email, password)
                 VALUES (:nom, :prenom, :email, :password)";
 
-        $query = $this->db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
-        return $query->execute([
+        return $stmt->execute([
             'nom' => $user->getLastName(),
             'prenom' => $user->getFirstName(),
             'email' => $user->getEmail(),
@@ -61,10 +61,10 @@ class UserRepository implements Repository
     public function readByEmail(string $email)
     {
         $sql = 'SELECT id, email, password FROM Users WHERE email = :email';
-        $query = $this->db->prepare($sql);
-        $query->execute(['email' => $email]);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['email' => $email]);
 
-        return $query->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -74,8 +74,8 @@ class UserRepository implements Repository
     public function getAll()
     {
         $sql = 'SELECT * FROM Users';
-        $query = $this->db->query($sql);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->stmt($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -86,10 +86,10 @@ class UserRepository implements Repository
     public function emailExists(string $email): bool
     {
         $sql = 'SELECT id FROM Users WHERE email = :email';
-        $query = $this->db->prepare($sql);
-        $query->execute(['email' => $email]);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['email' => $email]);
 
-        return (bool) $query->fetch();
+        return (bool) $stmt->fetch();
     }
 
 }

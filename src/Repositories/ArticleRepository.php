@@ -19,9 +19,9 @@ class ArticleRepository implements Repository
         $sql = "INSERT INTO Vetements (id_vendeur, titre, description, prix, categorie, taille, marque, etat, image)
                 VALUES (:id_vendeur, :titre, :description, :prix, :categorie, :taille, :marque, :etat, :image)";
 
-        $query = $this->db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
-        return $query->execute([
+        return $stmt->execute([
             'id_vendeur' => $article->getIdSeller(),
             'titre' => $article->getTitle(),
             'description' => $article->getDescription(),
@@ -38,9 +38,9 @@ class ArticleRepository implements Repository
     {
 
         $sql = 'SELECT * FROM Vetements WHERE id = :id';
-        $query = $this->db->prepare($sql);
-        $query->execute(['id' => $id]);
-        $articleData = $query->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $articleData = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$articleData) {
             return null;
         }
@@ -56,6 +56,20 @@ class ArticleRepository implements Repository
     {
         // Supprime un article dans la bdd
     }
+
+    public function getLastsArticles(int $limit = 12)
+    {
+        $sql = 'SELECT *
+                FROM Vetements
+                ORDER BY date_publication DESC
+                LIMIT :limit';
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        $lastArticles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->createArticleObjects($lastArticles);
+    }
     public function getAll()
     {
         $articlesData = $this->fetchAllArticles();
@@ -66,9 +80,9 @@ class ArticleRepository implements Repository
     private function fetchAllArticles()
     {
         $sql = 'SELECT * FROM Vetements';
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     private function createArticleObjects(array $articlesData)

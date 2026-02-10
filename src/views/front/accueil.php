@@ -1,22 +1,5 @@
 <?php
-
-use Config\Database;
-use Repositories\VetementsRepository;
-
-// Récupération des produits
-$products = [];
-try {
-    $pdo = (new Database())->getConnection();
-    $repo = new VetementsRepository($pdo);
-    $products = $repo->getDerniersArticles(12);
-} catch (Throwable $e) {
-    // Décommente pour debug :
-    echo 'Erreur: ' . htmlspecialchars($e->getMessage()); 
-    exit;
-}
-
-// Inclusion du header
-include_once __DIR__ . '/../partials/header.php';
+include_once 'src/views/partials/header.php';
 ?>
 
 <style>
@@ -74,7 +57,7 @@ include_once __DIR__ . '/../partials/header.php';
     }
 
     .product-link:hover .product-card {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
     }
 </style>
 
@@ -143,22 +126,21 @@ include_once __DIR__ . '/../partials/header.php';
         <div class="col-lg-9">
             <div class="row g-3 g-md-4">
 
-                <?php if (!empty($products)): ?>
-                    <?php foreach ($products as $p): ?>
-                        <?php
-                            $id = (int) ($p['id'] ?? 0);
-                            $nom = htmlspecialchars($p['nom'] ?? 'Produit');
-                            $prix = isset($p['prix']) ? number_format((float)$p['prix'], 2, ',', ' ') . ' €' : '';
-                            $image = $p['image'] ?? 'src/public/img/banniere.jpg';
-                            $imgSrc = htmlspecialchars($image);
-                        ?>
+                <?php if (!empty($articles)): ?>
+                    <?php foreach ($articles as $article): ?>
                         <div class="col-6 col-md-4 mb-4">
-                            <a href="index.php?page=details-produit&id=<?php echo $id; ?>" class="product-link">
+                            <a href="index.php?page=details-produit&id=<?= $article->getId() ?>" class="product-link">
+
                                 <div class="card h-100 shadow-sm product-card rounded-4">
-                                    <img src="<?php echo $imgSrc; ?>" class="card-img-top img-fluid" alt="<?php echo $nom; ?>">
+                                    <img src="<?= htmlspecialchars($article->getImagePath()) ?>" class="card-img-top img-fluid"
+                                        alt="<?= htmlspecialchars($article->getTitle()) ?>">
+
                                     <div class="card-body text-center p-3">
-                                        <h6 class="fw-bold mb-1"><?php echo $nom; ?></h6>
-                                        <p class="mb-0 fw-bold" style="color: var(--gold-accent);"><?php echo $prix; ?></p>
+                                        <h6 class="fw-bold mb-1"><?= htmlspecialchars($article->getTitle()) ?></h6>
+
+                                        <p class="mb-0 fw-bold" style="color: var(--gold-accent);">
+                                            <?= number_format($article->getPrice(), 2, ',', ' ') ?> €
+                                        </p>
                                     </div>
                                 </div>
                             </a>
@@ -177,4 +159,3 @@ include_once __DIR__ . '/../partials/header.php';
 
 <?php
 include_once __DIR__ . '/../partials/footer.php';
-?>

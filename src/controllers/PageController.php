@@ -5,6 +5,8 @@ namespace Controllers;
 use Services\ArticleService;
 use Services\UserService;
 
+use Exception;
+
 class PageController
 {
     private ArticleService $articleService;
@@ -18,6 +20,12 @@ class PageController
 
     public function displayAccueil()
     {
+        try {
+            $articles = $this->articleService->getLastsArticles();
+        } catch (Exception $e) {
+            $articles = [];
+        }
+
         require_once 'src/views/front/accueil.php';
     }
 

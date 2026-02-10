@@ -33,4 +33,14 @@ class ArticleService
         }
         return $article;
     }
+
+    public function getLastsArticles()
+    {
+        $lastsArticles = $this->articleRepository->getLastsArticles();
+
+        if (!$lastsArticles) {
+            throw new Exception("Aucun article n'a été trouvé");
+        }
+        return $lastsArticles;
+    }
 }

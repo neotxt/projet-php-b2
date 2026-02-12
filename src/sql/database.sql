@@ -24,7 +24,7 @@ CREATE TABLE UserRoles (
     FOREIGN KEY (role_id) REFERENCES Roles(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Clothes (
+CREATE TABLE Articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     seller_id INT NOT NULL,
     title VARCHAR(100) NOT NULL,

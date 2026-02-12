@@ -15,7 +15,7 @@ class ArticleController
         $this->articleService = $articleService;
     }
 
-    public function listAllArticles()
+    public function displayArticles()
     {
         try {
             $articles = $this->articleService->getAllArticles();
@@ -25,7 +25,7 @@ class ArticleController
         require_once 'src/views/front/articles.php';
     }
 
-    public function viewArticleDetails()
+    public function displayDetailProduit()
     {
         if (!isset($_GET['id']) || empty($_GET['id'])) {
             header('Location: index.php?page=articles');
@@ -40,17 +40,6 @@ class ArticleController
             header('Location: index.php?page=articles');
             exit();
         }
-    }
-
-    // Méthodes appelées depuis index.php
-    public function displayArticles()
-    {
-        $this->listAllArticles();
-    }
-
-    public function displayDetailProduit()
-    {
-        $this->viewArticleDetails();
     }
 
     public function deleteArticle()

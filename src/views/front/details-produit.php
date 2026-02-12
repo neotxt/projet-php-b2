@@ -25,6 +25,13 @@ include_once 'src/views/partials/header.php';
                 <h1 class="display-5 fw-bold"><?= htmlspecialchars($article->getTitle()) ?></h1>
                 <p class="fs-2 text-primary mb-4"><?= number_format($article->getPrice(), 2, ',', ' ') ?> €</p>
 
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><strong>Catégorie :</strong> <?= htmlspecialchars($article->getCategory()) ?></li>
+                    <li class="list-group-item"><strong>Taille :</strong> <?= htmlspecialchars($article->getSize()) ?></li>
+                    <li class="list-group-item"><strong>Marque :</strong> <?= htmlspecialchars($article->getBrand()) ?></li>
+                    <li class="list-group-item"><strong>État :</strong> <?= htmlspecialchars($article->getCondition()) ?></li>
+                </ul>
+
                 <div class="mb-4">
                     <h5 class="fw-bold">Description du produit</h5>
                     <p><?= htmlspecialchars($article->getDescription()) ?></p>

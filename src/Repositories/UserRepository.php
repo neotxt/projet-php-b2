@@ -8,8 +8,17 @@ use PDO;
  * Gère les requêtes SQL avec la table "users" de la base de données.
  * @implements Repository
  */
-class UserRepository implements Repository
-{
+class UserRepository implements Repository {
+    /**
+     * Récupère tous les utilisateurs depuis la base de données
+     * @return array Liste des utilisateurs
+     */
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM Users';
+        $query = $this->db->query($sql);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     private PDO $db;
 
@@ -26,14 +35,14 @@ class UserRepository implements Repository
      */
     public function create(object $user): bool
     {
-        $sql = "INSERT INTO users (nom, prenom, email, password)
-                VALUES (:nom, :prenom, :email, :password)";
+        $sql = "INSERT INTO users (last_name,first_name, email, password)
+                VALUES (:last_name, :first_name, :email, :password)";
 
-        $stmt = $this->db->prepare($sql);
+        $query = $this->db->prepare($sql);
 
-        return $stmt->execute([
-            'nom' => $user->getLastName(),
-            'prenom' => $user->getFirstName(),
+        return $query->execute([
+            'last_name' => $user->getLastName(),
+            'first_name' => $user->getFirstName(),
             'email' => $user->getEmail(),
             'password' => $user->getPassword()
         ]);
@@ -61,21 +70,10 @@ class UserRepository implements Repository
     public function readByEmail(string $email)
     {
         $sql = 'SELECT id, email, password FROM Users WHERE email = :email';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(['email' => $email]);
+        $query = $this->db->prepare($sql);
+        $query->execute(['email' => $email]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * Récupère tous les utilisateurs depuis la base de données
-     * @return array Liste des utilisateurs
-     */
-    public function getAll()
-    {
-        $sql = 'SELECT * FROM Users';
-        $stmt = $this->db->stmt($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -86,10 +84,9 @@ class UserRepository implements Repository
     public function emailExists(string $email): bool
     {
         $sql = 'SELECT id FROM Users WHERE email = :email';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(['email' => $email]);
+        $query = $this->db->prepare($sql);
+        $query->execute(['email' => $email]);
 
-        return (bool) $stmt->fetch();
+        return (bool) $query->fetch();
     }
-
 }

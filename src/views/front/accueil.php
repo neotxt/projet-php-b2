@@ -35,6 +35,16 @@ include_once 'src/views/partials/header.php';
         background-color: #ffffff !important;
         border: none !important;
         overflow: hidden;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .product-card .card-img-top {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
     }
 
     .product-link:hover {

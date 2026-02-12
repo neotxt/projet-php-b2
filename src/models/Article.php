@@ -12,7 +12,7 @@ class Article
     private string $category;
     private string $size;
     private string $brand;
-    private string $state;
+    private string $condition;
     private string $imagePath;
 
     public function __construct(
@@ -24,7 +24,7 @@ class Article
         string $category,
         string $size,
         string $brand,
-        string $state,
+        string $condition,
         string $imagePath
     ) {
         $this->id = $id;
@@ -35,7 +35,7 @@ class Article
         $this->category = $category;
         $this->size = $size;
         $this->brand = $brand;
-        $this->state = $state;
+        $this->condition = $condition;
         $this->imagePath = $imagePath;
     }
 
@@ -78,9 +78,9 @@ class Article
         return $this->brand;
     }
 
-    public function getState()
+    public function getCondition()
     {
-        return $this->state;
+        return $this->condition;
     }
 
     public function getImagePath(): string

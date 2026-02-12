@@ -23,9 +23,9 @@ class VetementsRepository implements Repository
     public function getDerniersArticles(int $limit = 12): array
     {
         try {
-            $sql = "SELECT id, titre AS nom, image, prix
-                    FROM Vetements
-                    ORDER BY date_publication DESC
+            $sql = "SELECT id, title AS nom, image, price
+                    FROM clothes
+                    ORDER BY publish_date DESC
                     LIMIT :limit";
 
             $stmt = $this->pdo->prepare($sql);
@@ -48,8 +48,8 @@ class VetementsRepository implements Repository
     public function read(int $id)
     {
         try {
-            $sql = "SELECT id, titre AS nom, description, image, prix, categorie, taille, marque, etat, statut
-                    FROM Vetements
+            $sql = "SELECT id, title AS nom, description, image, price, category, size, brand, `condition`, status
+                    FROM clothes
                     WHERE id = :id
                     LIMIT 1";
 
@@ -72,9 +72,9 @@ class VetementsRepository implements Repository
     public function getAll(): array
     {
         try {
-            $sql = "SELECT id, titre AS nom, description, image, prix, categorie, taille, marque, etat, statut
-                    FROM Vetements
-                    ORDER BY date_publication DESC";
+            $sql = "SELECT id, title AS nom, description, image, price, category, size, brand, `condition`, status
+                    FROM clothes
+                    ORDER BY publish_date DESC";
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();

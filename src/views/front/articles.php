@@ -43,6 +43,16 @@ include_once 'src/views/partials/header.php';
         background-color: #ffffff !important;
         border: none !important;
         overflow: hidden;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .product-card .card-img-top {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
     }
 
     .product-link:hover {
@@ -114,12 +124,16 @@ include_once 'src/views/partials/header.php';
 
         <div class="col-lg-9">
             <div class="row g-3 g-md-4">
-                <?php // Changement dans la manière de récupérer les données, on va maintenant passer par les getters du model Article
-                foreach ($articles as $article): ?>
+                <?php if (empty($articles)): ?>
+                    <div class="col-12">
+                        <p class="text-center">Aucun article trouvé.</p>
+                    </div>
+                <?php endif; ?>
+                <?php foreach ($articles as $article): ?>
                     <div class="col-6 col-md-4 mb-4">
                         <a href="index.php?page=details-produit&id=<?= $article->getId() ?>" class="product-link">
                             <div class="card h-100 shadow-sm product-card rounded-4">
-                                <img src="<?= htmlspecialchars($article->getImagePath) ?>" class="card-img-top img-fluid"
+                                <img src="<?= htmlspecialchars($article->getImagePath()) ?>" class="card-img-top img-fluid"
                                     alt="<?= htmlspecialchars($article->getTitle()) ?>">
                                 <div class="card-body text-center p-3">
                                     <h6 class="fw-bold mb-1"><?= htmlspecialchars($article->getTitle()) ?></h6>

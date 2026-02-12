@@ -82,6 +82,9 @@ switch ($page) {
     case 'panier':
         $pageController->displayPanier();
         break;
+    case 'paiement':
+        include_once 'src/views/front/paiement.php';
+        break;
     case 'a-propos':
         $pageController->displayAPropos();
         break;

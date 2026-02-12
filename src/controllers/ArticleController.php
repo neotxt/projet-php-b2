@@ -41,4 +41,34 @@ class ArticleController
             exit();
         }
     }
+
+    // Méthodes appelées depuis index.php
+    public function displayArticles()
+    {
+        $this->listAllArticles();
+    }
+
+    public function displayDetailProduit()
+    {
+        $this->viewArticleDetails();
+    }
+
+    public function deleteArticle()
+    {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            $_SESSION['error'] = "ID article manquant";
+            header('Location: index.php?page=mes-articles');
+            exit();
+        }
+
+        $id = $_GET['id'];
+        try {
+            $this->articleService->deleteArticle($id);
+            $_SESSION['success'] = "Article supprimé avec succès";
+        } catch (Exception $e) {
+            $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+        }
+        header('Location: index.php?page=mes-articles');
+        exit();
+    }
 }

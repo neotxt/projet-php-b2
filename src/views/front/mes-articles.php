@@ -4,8 +4,8 @@ include_once 'src/views/partials/header.php';
 
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-5">
-        <h1 class="fw-bold">Mon Dressing</h1>
-        <a href="index.php?page=vendre" class="btn btn-custom px-4 py-2">Vendre un nouvel article</a>
+        <h1 class="fw-bold">Mon Vide Dressing</h1>
+        <a href="index.php?page=vente" class="btn btn-custom px-4 py-2">Vendre un nouvel article</a>
     </div>
 
     <?php if (empty($mesArticles)): ?>

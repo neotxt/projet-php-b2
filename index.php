@@ -68,10 +68,10 @@ if ($action) {
 
 switch ($page) {
     case 'details-produit':
-        $articleController->viewArticleDetails();
+        $articleController->displayDetailProduit();
         break;
     case 'articles':
-        $articleController->listAllArticles();
+        $articleController->displayArticles();
         break;
     case 'creer-compte':
         $userController->displayCreerCompte();
@@ -95,5 +95,5 @@ switch ($page) {
     default:
         $pageController->displayAccueil();
         break;
-    
+
 }

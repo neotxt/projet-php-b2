@@ -1,0 +1,16 @@
+# logs
+logs/*
+!logs/.gitkeep
+
+# images des articles
+src/public/uploads/*
+!src/public/uploads/.gitkeep
+
+# fichiers systèmes
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# fichier d'environnement
+.env

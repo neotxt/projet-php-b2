@@ -15,7 +15,6 @@ include_once 'src/views/partials/header.php';
         color: var(--forest-green) !important;
     }
 
-    /* Style du cadre blanc des filtres */
     .filter-card {
         background-color: #ffffff !important;
         color: var(--forest-green) !important;
@@ -31,7 +30,6 @@ include_once 'src/views/partials/header.php';
         padding-bottom: 0.5rem;
     }
 
-    /* Style de la carte produit cliquable */
     .product-link {
         text-decoration: none !important;
         color: inherit !important;
@@ -59,11 +57,11 @@ include_once 'src/views/partials/header.php';
         transform: translateY(-10px);
     }
 
+    /* Correction : box-shadow au lieu de shadow */
     .product-link:hover .product-card {
-        shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
     }
 
-    /* Personnalisation des boutons de taille */
     .btn-check:checked+.btn-outline-dark {
         background-color: var(--forest-green);
         color: #fff;
@@ -76,60 +74,67 @@ include_once 'src/views/partials/header.php';
 
     <div class="row">
         <div class="col-lg-3 mb-5">
-            <div class="card filter-card shadow-sm border-0 rounded-4 p-4">
-                <h5 class="mb-4 fw-bold">Filtrer par</h5>
+            <form action="index.php" method="GET">
+                <input type="hidden" name="page" value="articles">
 
-                <div class="mb-4">
-                    <p class="filter-title">Vêtements</p>
-                    <div class="form-check mb-2 small">
-                        <input class="form-check-input" type="checkbox" id="cat1">
-                        <label class="form-check-label" for="cat1">T-shirts & Tops</label>
+                <div class="card filter-card shadow-sm border-0 rounded-4 p-4">
+                    <h5 class="mb-4 fw-bold">Filtrer par</h5>
+
+                    <div class="mb-4">
+                        <p class="filter-title">Catégories</p> 
+                        
+                        <div class="form-check mb-2 small">
+                            <input class="form-check-input" type="checkbox" name="categorie[]" value="pantalon" id="cat1" 
+                                <?= (isset($_GET['categorie']) && in_array('pantalon', $_GET['categorie'])) ? 'checked' : '' ?>>
+                            <label class="form-check-label" for="cat1">Jeans & Pantalons</label>
+                        </div>
+
+                        <div class="form-check mb-2 small">
+                            <input class="form-check-input" type="checkbox" name="categorie[]" value="tshirt" id="cat2"
+                                <?= (isset($_GET['categorie']) && in_array('tshirt', $_GET['categorie'])) ? 'checked' : '' ?>>
+                            <label class="form-check-label" for="cat2">T-shirts & Tops</label>
+                        </div>
                     </div>
-                    <div class="form-check mb-2 small">
-                        <input class="form-check-input" type="checkbox" id="cat2">
-                        <label class="form-check-label" for="cat2">Robes</label>
+
+                    <div class="mb-4">
+                        <p class="filter-title">Taille</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <input type="checkbox" class="btn-check" name="taille[]" value="S" id="sizeS"
+                                <?= (isset($_GET['taille']) && in_array('S', $_GET['taille'])) ? 'checked' : '' ?>>
+                            <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeS">S</label>
+
+                            <input type="checkbox" class="btn-check" name="taille[]" value="M" id="sizeM"
+                                <?= (isset($_GET['taille']) && in_array('M', $_GET['taille'])) ? 'checked' : '' ?>>
+                            <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeM">M</label>
+
+                             <input type="checkbox" class="btn-check" name="taille[]" value="L" id="sizeL"
+                                <?= (isset($_GET['taille']) && in_array('L', $_GET['taille'])) ? 'checked' : '' ?>>
+                            <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeL">L</label>
+                        </div>
                     </div>
-                    <div class="form-check mb-2 small">
-                        <input class="form-check-input" type="checkbox" id="cat3">
-                        <label class="form-check-label" for="cat3">Jeans & Pantalons</label>
+
+                    <div class="mb-4">
+                        <p class="filter-title">Prix maximum</p>
+                        <input type="range" class="form-range" name="prix_max" id="priceRange" min="0" max="200" 
+                               value="<?= $_GET['prix_max'] ?? 200 ?>"
+                               oninput="this.nextElementSibling.querySelector('#currentPriceValue').innerText = this.value">
+                   
+                        <div class="d-flex justify-content-between small opacity-75">
+                            <span>0 €</span>
+                            <span><span id="currentPriceValue"><?= $_GET['prix_max'] ?? 200 ?></span> €</span>
+                        </div>
                     </div>
+
+                    <button type="submit" class="btn btn-dark w-100 mt-2 py-2 fw-bold small rounded-3">APPLIQUER</button>
+                    <a href="index.php?page=articles" class="btn btn-link w-100 mt-2 text-decoration-none text-muted small">Réinitialiser</a>
                 </div>
-
-                <div class="mb-4">
-                    <p class="filter-title">Taille</p>
-                    <div class="d-flex flex-wrap gap-2">
-                        <input type="checkbox" class="btn-check" id="sizeS">
-                        <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeS">S</label>
-
-                        <input type="checkbox" class="btn-check" id="sizeM">
-                        <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeM">M</label>
-
-                        <input type="checkbox" class="btn-check" id="sizeL">
-                        <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeL">L</label>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <p class="filter-title">Prix</p>
-                    <input type="range" class="form-range" id="priceRange" min="0" max="200">
-                    <div class="d-flex justify-content-between small opacity-75">
-                        <span>0 €</span>
-                        <span>200 €</span>
-                    </div>
-                </div>
-
-                <button class="btn btn-dark w-100 mt-2 py-2 fw-bold small rounded-3">APPLIQUER</button>
-            </div>
+            </form> 
         </div>
 
         <div class="col-lg-9">
             <div class="row g-3 g-md-4">
-                <?php if (empty($articles)): ?>
-                    <div class="col-12">
-                        <p class="text-center">Aucun article trouvé.</p>
-                    </div>
-                <?php endif; ?>
-                <?php foreach ($articles as $article): ?>
+                <?php // Changement dans la manière de récupérer les données, on va maintenant passer par les getters du model Article
+                foreach ($articles as $article): ?>
                     <div class="col-6 col-md-4 mb-4">
                         <a href="index.php?page=details-produit&id=<?= $article->getId() ?>" class="product-link">
                             <div class="card h-100 shadow-sm product-card rounded-4">
@@ -151,6 +156,5 @@ include_once 'src/views/partials/header.php';
 </div>
 
 <?php
-// Inclusion du footer commun
 include_once 'src/views/partials/footer.php';
 ?>

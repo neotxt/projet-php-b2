@@ -1,5 +1,17 @@
 <?php
 include_once 'src/views/partials/header.php';
+
+// --- LOGIQUE FRONT-END : CALCUL DES TOTAUX ---
+$sousTotalHT = 0;
+// On vérifie si la variable $articlesPanier existe et n'est pas vide
+if (!empty($articlesPanier)) {
+    foreach ($articlesPanier as $item) {
+        $sousTotalHT += $item->getPrice();
+    }
+}
+$tva = $sousTotalHT * 0.20;
+$totalTTC = $sousTotalHT + $tva;
+// --------------------------------------------
 ?>
 
 <style>
@@ -18,7 +30,6 @@ include_once 'src/views/partials/header.php';
         color: var(--forest-green) !important;
     }
 
-    /* Style personnalisé pour le bouton de paiement */
     .btn-checkout {
         background-color: var(--forest-green) !important;
         border-color: var(--forest-green) !important;
@@ -26,14 +37,12 @@ include_once 'src/views/partials/header.php';
         transition: all 0.3s ease;
     }
 
-    /* Effet doré au survol comme sur le header/footer */
     .btn-checkout:hover {
         background-color: var(--gold-accent) !important;
         border-color: var(--gold-accent) !important;
         transform: translateY(-2px);
     }
 
-    /* Harmonisation de la couleur du prix total */
     .text-total {
         color: var(--forest-green) !important;
     }
@@ -56,65 +65,53 @@ include_once 'src/views/partials/header.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="ps-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://via.placeholder.com/80"
-                                        class="img-fluid rounded me-3 border shadow-sm"
-                                        style="width: 60px; height: 60px; object-fit: cover;" alt="T-shirt">
-                                    <div>
-                                        <h6 class="mb-0 fw-bold">T-shirt en Coton Bio</h6>
-                                        <small class="text-muted d-none d-md-block">Taille: M, Couleur: Blanc</small>
+                        <?php if (empty($articlesPanier)): ?>
+                            <tr>
+                                <td colspan="5" class="py-5 text-center">
+                                    <div class="py-4">
+                                        <i class="bi bi-cart-x fs-1 text-muted"></i>
+                                        <p class="mt-3 fs-5">Votre panier est vide</p>
+                                        <a href="index.php?page=articles" class="btn btn-outline-dark rounded-pill px-4">Voir nos articles</a>
                                     </div>
-                                </div>
-                            </td>
-                            <td>25,00 €</td>
-                            <td style="min-width: 100px;">
-                                <input type="number" class="form-control form-control-sm text-center" value="1" min="1">
-                            </td>
-                            <td class="fw-bold">25,00 €</td>
-                            <td class="text-end pe-3">
-                                <button class="btn btn-sm btn-outline-danger border-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://via.placeholder.com/80"
-                                        class="img-fluid rounded me-3 border shadow-sm"
-                                        style="width: 60px; height: 60px; object-fit: cover;" alt="Jean">
-                                    <div>
-                                        <h6 class="mb-0 fw-bold">Jean Slim Bleu</h6>
-                                        <small class="text-muted d-none d-md-block">Taille: 40</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>49,98 €</td>
-                            <td>
-                                <input type="number" class="form-control form-control-sm text-center" value="1" min="1">
-                            </td>
-                            <td class="fw-bold">49,98 €</td>
-                            <td class="text-end pe-3">
-                                <button class="btn btn-sm btn-outline-danger border-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <?php foreach ($articlesPanier as $item): ?>
+                                <tr>
+                                    <td class="ps-3">
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?= htmlspecialchars($item->getImagePath()) ?>"
+                                                class="img-fluid rounded me-3 border shadow-sm"
+                                                style="width: 60px; height: 60px; object-fit: cover;" 
+                                                alt="<?= htmlspecialchars($item->getTitle()) ?>">
+                                            <div>
+                                                <h6 class="mb-0 fw-bold"><?= htmlspecialchars($item->getTitle()) ?></h6>
+                                                <small class="text-muted d-none d-md-block">Taille: <?= htmlspecialchars($item->getSize()) ?></small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><?= number_format($item->getPrice(), 2, ',', ' ') ?> €</td>
+                                    <td style="min-width: 100px;">
+                                        <input type="number" class="form-control form-control-sm text-center mx-auto" style="width: 60px;" value="1" readonly>
+                                    </td>
+                                    <td class="fw-bold"><?= number_format($item->getPrice(), 2, ',', ' ') ?> €</td>
+                                    <td class="text-end pe-3">
+                                        <a href="index.php?page=supprimer-panier&id=<?= $item->getId() ?>" 
+                                           class="btn btn-sm btn-outline-danger border-0" 
+                                           title="Supprimer l'article">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
             <div class="mt-4 text-center text-md-start">
-                <a href="articles.php" class="btn btn-link text-decoration-none text-muted p-0">
+                <a href="index.php?page=articles" class="btn btn-link text-decoration-none text-muted p-0">
                     ← Continuer mes achats
                 </a>
             </div>
@@ -127,11 +124,11 @@ include_once 'src/views/partials/header.php';
 
                     <div class="d-flex justify-content-between mb-2 text-muted">
                         <span>Sous-total HT</span>
-                        <span>74,98 €</span>
+                        <span><?= number_format($sousTotalHT, 2, ',', ' ') ?> €</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2 text-muted">
                         <span>TVA (20%)</span>
-                        <span>15,00 €</span>
+                        <span><?= number_format($tva, 2, ',', ' ') ?> €</span>
                     </div>
                     <div class="d-flex justify-content-between mb-4 text-muted">
                         <span>Livraison</span>
@@ -142,10 +139,10 @@ include_once 'src/views/partials/header.php';
 
                     <div class="d-flex justify-content-between mb-4">
                         <span class="fw-bold fs-5">Total TTC</span>
-                        <span class="fw-bold fs-4 text-total">89,98 €</span>
+                        <span class="fw-bold fs-4 text-total"><?= number_format($totalTTC, 2, ',', ' ') ?> €</span>
                     </div>
 
-                    <button class="btn btn-checkout btn-lg w-100 py-3 fw-bold rounded-3 shadow-sm">
+                    <button class="btn btn-checkout btn-lg w-100 py-3 fw-bold rounded-3 shadow-sm" <?= empty($articlesPanier) ? 'disabled' : '' ?>>
                         Passer au paiement
                     </button>
 

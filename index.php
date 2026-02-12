@@ -60,6 +60,9 @@ if ($action) {
             exit();
         default:
             exit();
+        case 'supprimer_article':
+            $articleController->deleteArticle(); // On demande au Controller de supprimer
+            exit();
     }
 }
 
@@ -85,8 +88,12 @@ switch ($page) {
     case 'vente':
         include_once 'src/views/front/vente.php';
         break;
+    case 'mes-articles':
+        include_once 'src/views/front/mes-articles.php';
+        break;
     case 'accueil':
     default:
         $pageController->displayAccueil();
         break;
+    
 }

@@ -40,15 +40,16 @@ include_once 'src/views/partials/header.php';
                 </div>
             <?php endif; ?>
 
-            <form action="/projet-php-b2/index.php?action=submit_register" method="POST">
+            
+            <form action="index.php?action=submit_register" method="POST">
                 <div class="mb-2">
                     <label>Nom</label>
-                    <input type="text" name="lastName" class="form-control" required>
+                    <input type="text" name="name" class="form-control" required>
                 </div>
 
                 <div class="mb-2">
                     <label>Prénom</label>
-                    <input type="text" name="firstName" class="form-control" required>
+                    <input type="text" name="prenom" class="form-control" required>
                 </div>
 
                 <div class="mb-2">
@@ -73,7 +74,7 @@ include_once 'src/views/partials/header.php';
 
             <p class="text-center mt-3">
                 Déjà un compte ?
-                <a href="/projet-php-b2/src/views/front/connexion.php">Connectez-vous</a>
+               <a href="index.php?page=login">Connectez-vous</a>
             </p>
         </div>
     </div>

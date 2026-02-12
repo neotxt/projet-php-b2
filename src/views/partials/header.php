@@ -70,6 +70,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?page=vente">Mes ventes</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="index.php?page=mes-articles">Mes articles</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?page=a-propos">Qui sommes-nous ?</a>
                     </li>

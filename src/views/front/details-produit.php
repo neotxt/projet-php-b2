@@ -23,19 +23,34 @@ include_once 'src/views/partials/header.php';
                 </nav>
 
                 <h1 class="display-5 fw-bold"><?= htmlspecialchars($article->getTitle()) ?></h1>
+                
+                <p class="text-muted mb-1"><?= htmlspecialchars($article->getBrand() ?? 'Marque inconnue') ?></p>
+                
                 <p class="fs-2 text-primary mb-4"><?= number_format($article->getPrice(), 2, ',', ' ') ?> €</p>
 
                 <div class="mb-4">
                     <h5 class="fw-bold">Description du produit</h5>
                     <p><?= htmlspecialchars($article->getDescription()) ?></p>
                 </div>
-                <button class="btn btn-dark btn-lg w-100 py-3">Ajouter au panier</button>
+
+                <a href="index.php?page=ajouter-panier&id=<?= $article->getId() ?>" class="btn btn-dark btn-lg w-100 py-3 fw-bold">
+                    Ajouter au panier
+                </a>
+                
+                <div class="mt-3">
+                    <span class="badge bg-secondary">Taille : <?= htmlspecialchars($article->getSize()) ?></span>
+                </div>
             </div>
         </div>
     </div>
 
+<?php else: ?>
+    <div class="container my-5 text-center">
+        <h2>Oups ! Cet article n'existe plus.</h2>
+        <a href="index.php?page=articles" class="btn btn-primary mt-3">Retour à la boutique</a>
+    </div>
 <?php endif ?>
 
 <?php
-// Inclure le footer
 include_once 'src/views/partials/footer.php';
+?>

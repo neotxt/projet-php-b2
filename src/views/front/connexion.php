@@ -48,7 +48,7 @@ include_once 'src/views/partials/header.php';
                 </div>
             <?php endif; ?>
 
-            <form action="/projet-php-b2/index.php?action=submit_connexion" method="POST">
+            <form action="index.php?action=submit_connexion" method="POST">
                 <div class="mb-2">
                     <label>Email</label>
                     <input type="email" name="email" class="form-control" required>
@@ -59,12 +59,13 @@ include_once 'src/views/partials/header.php';
                     <input type="password" name="password" class="form-control" required>
                 </div>
 
-                <button class="btn btn-custom w-100">Se connecter</button>
+                
+                <button type="submit" class="btn btn-custom w-100">Se connecter</button>
             </form>
 
             <p class="text-center mt-3">
                 Pas encore de compte ?
-                <a href="/projet-php-b2/index.php?page=creer-compte">Créer un compte</a>
+               <a href="index.php?page=creer-compte">Créer un compte</a>
             </p>
         </div>
     </div>

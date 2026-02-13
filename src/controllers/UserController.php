@@ -3,13 +3,11 @@
 namespace Controllers;
 
 use Services\UserService;
-use Exception;
+use Models\User;
 
-/**
- * Contrôleur gérant les actions liés aux utilisateurs.
- * Il s'occuppe de la réception des formulaires, les traite grâce au Service
- * Et gère les redirections.
- */
+use Exception;
+use Utils\Logger;
+
 class UserController
 {
     private UserService $userService;
@@ -19,15 +17,6 @@ class UserController
         $this->userService = $userService;
     }
 
-
-    /**
-     * Traite la soumission du formulaire d'inscription
-     * 
-     * Vérifie la méthode POST, appelle le service d'inscription
-     * Succès: Redirige vers la page de connexion.
-     * Refus: Donne l'erreur.
-     * @return never
-     */
     public function createUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -36,25 +25,30 @@ class UserController
         }
 
         try {
-            $this->userService->userRegister($_POST);
+            $newUser = $this->userService->userRegister($_POST);
+
             $_SESSION['register_success'] = "Compte créé avec succès. Connectez-vous.";
+
+            Logger::info("Nouveau compte créé", [
+                'name' => $newUser->getName(),
+                'email' => $newUser->getEmail()
+            ]);
+
             header('Location: index.php?page=connexion');
             exit();
         } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
+
+            Logger::error("Echec d'inscription", [
+                'email' => $_POST['email'] ?? 'inconnu',
+                'error' => $e->getMessage()
+            ]);
+
             header('Location: index.php?page=creer-compte');
             exit();
         }
     }
 
-    /**
-     * Traite la soumission au formulaire de connexion.
-     *
-     * Appelle le service de connexion pour vérifier les identifiants.
-     * Succès: Remplit la SESSION et redirige vers l'écran d'accueil.
-     * Refus: Donne l'erreur.
-     * @return void
-     */
     public function connexionUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -65,25 +59,37 @@ class UserController
         try {
             $user = $this->userService->userConnexion($_POST);
 
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_id'] = $user->getId();
+            $_SESSION['user_email'] = $user->getEmail();
+
+            Logger::info("Connexion réussie", [
+                'id' => $user->getId(),
+                'email' => $user->getEmail()
+            ]);
 
             header('Location: index.php?page=accueil');
             exit();
+
         } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
+
+            Logger::warn("Echec de connexion", [
+                'email_tente' => $_POST['email'] ?? '',
+                'raison' => $e->getMessage()
+            ]);
+
             header('Location: index.php?page=connexion');
             exit();
         }
     }
 
-    /**
-     * Déconnecte l'utilisateur.
-     * Vide la session, supprime les cookies et redirigé vers la page de connexion.
-     * @return never
-     */
     public function logoutUser()
     {
+        Logger::info("Déconnexion utilisateur", [
+            'id' => $_SESSION['user_id'] ?? '?',
+            'email' => $_SESSION['user_email'] ?? '?'
+        ]);
+
         $_SESSION = [];
 
         if (ini_get("session.use_cookies")) {

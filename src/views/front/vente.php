@@ -62,21 +62,35 @@ include_once __DIR__ . '/../partials/header.php';
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger text-center">
+                    <?= $_SESSION['error']; ?>
+                    <?php unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="alert alert-success text-center">
+                    <?= $_SESSION['success']; ?>
+                    <?php unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
             <div class="text-center mb-5">
                 <h1 class="display-5 fw-bold">Vendre un article</h1>
+
                 <p class="lead">Donnez une seconde vie à vos vêtements en quelques clics.</p>
             </div>
 
             <div class="card sell-card shadow-sm rounded-4 p-4 p-md-5">
                 <form action="index.php?action=submit_vendre" method="POST" enctype="multipart/form-data">
-                    
+
                     <div class="mb-5">
                         <h5 class="fw-bold mb-3 border-bottom pb-2">1. Photo de l'article</h5>
                         <div class="upload-zone" onclick="document.getElementById('fileInput').click();">
                             <span class="fs-1 text-muted"></span>
                             <p class="mb-0 mt-2 text-muted">Ajoutez une photo de votre article</p>
-                            <input type="file" id="fileInput" name="image" style="display: none;" required onchange="previewImage(event)">
+                            <input type="file" id="fileInput" name="image" style="display: none;" required
+                                onchange="previewImage(event)">
                             <div id="imagePreview" class="mt-3 d-none">
                                 <img id="preview" src="#" alt="Aperçu" style="max-width: 100px; border-radius: 8px;">
                             </div>
@@ -85,25 +99,27 @@ include_once __DIR__ . '/../partials/header.php';
 
                     <div class="mb-5">
                         <h5 class="fw-bold mb-3 border-bottom pb-2">2. Détails de l'annonce</h5>
-                        
+
                         <div class="mb-3">
                             <label class="form-label">Titre</label>
-                            <input type="text" name="titre" class="form-control form-control-lg border-0 bg-light" placeholder="Ex: pantalon" required>
+                            <input type="text" name="title" class="form-control form-control-lg border-0 bg-light"
+                                placeholder="Ex: pantalon" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <textarea name="description" class="form-control border-0 bg-light" rows="4" placeholder="Décrivez l'état, la matière, la coupe..." required></textarea>
+                            <textarea name="description" class="form-control border-0 bg-light" rows="4"
+                                placeholder="Décrivez l'état, la matière, la coupe..." required></textarea>
                         </div>
                     </div>
 
                     <div class="mb-5">
                         <h5 class="fw-bold mb-3 border-bottom pb-2">3. Catégorie, État & Prix</h5>
-                        
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Catégorie</label>
-                                <select name="categorie" class="form-select border-0 bg-light" required>
+                                <select name="category" class="form-select border-0 bg-light" required>
                                     <option value="">Choisir une catégorie</option>
                                     <option value="pantalon">Pantalon</option>
                                     <option value="tshirt">T-shirt</option>
@@ -114,7 +130,7 @@ include_once __DIR__ . '/../partials/header.php';
 
                             <div class="col-md-6">
                                 <label class="form-label">État</label>
-                                <select name="etat" class="form-select border-0 bg-light" required>
+                                <select name="condition" class="form-select border-0 bg-light" required>
                                     <option value="">Choisir l'état</option>
                                     <option value="neuf">Neuf avec étiquette</option>
                                     <option value="tres_bon">Très bon état</option>
@@ -125,7 +141,7 @@ include_once __DIR__ . '/../partials/header.php';
 
                             <div class="col-md-6 mt-3">
                                 <label class="form-label">Taille</label>
-                                <select name="taille" class="form-select border-0 bg-light" required>
+                                <select name="size" class="form-select border-0 bg-light" required>
                                     <option value="">Choisir une taille</option>
                                     <option value="XS">XS</option>
                                     <option value="S">S</option>
@@ -138,7 +154,8 @@ include_once __DIR__ . '/../partials/header.php';
                             <div class="col-md-6 mt-3">
                                 <label class="form-label">Prix de vente (€)</label>
                                 <div class="input-group">
-                                    <input type="number" name="prix" class="form-control border-0 bg-light" placeholder="0.00" step="0.01" required>
+                                    <input type="number" name="price" class="form-control border-0 bg-light"
+                                        placeholder="0.00" step="0.01" required>
                                     <span class="input-group-text border-0 bg-light">€</span>
                                 </div>
                             </div>
@@ -149,7 +166,9 @@ include_once __DIR__ . '/../partials/header.php';
                         <button type="submit" class="btn btn-custom btn-lg w-100 py-3 fw-bold rounded-3 shadow">
                             Ajouter mon article
                         </button>
-                        <p class="text-muted small mt-3">En publiant, vous acceptez nos conditions générales de vente.</p>
+                        <p class="text-muted small mt-3">En publiant, vous acceptez nos conditions générales de
+                            vente.
+                        </p>
                     </div>
 
                 </form>
@@ -160,15 +179,15 @@ include_once __DIR__ . '/../partials/header.php';
 </div>
 
 <script>
-function previewImage(event) {
-    const reader = new FileReader();
-    reader.onload = function(){
-        const output = document.getElementById('preview');
-        output.src = reader.result;
-        document.getElementById('imagePreview').classList.remove('d-none');
-    };
-    reader.readAsDataURL(event.target.files[0]);
-}
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('preview');
+            output.src = reader.result;
+            document.getElementById('imagePreview').classList.remove('d-none');
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
 </script>
 
 <?php

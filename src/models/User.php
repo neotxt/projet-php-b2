@@ -8,6 +8,12 @@ namespace Models;
  */
 class User
 {
+
+    /**
+     * @var int
+     */
+    private int $id;
+
     /**
      * @var string
      */
@@ -32,17 +38,28 @@ class User
     /**
      * Initialise un nouvel objet User.
      *
+     * @param int $id
      * @param string $lastName
      * @param string $firstName
      * @param string $email
      * @param string $password
      */
-    public function __construct(string $lastName, string $firstName, string $email, string $password)
+    public function __construct(int $id, string $lastName, string $firstName, string $email, string $password)
     {
+        $this->id = $id;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
         $this->email = $email;
         $this->password = $password;
+    }
+
+    /**
+     * Récupère l'identifiant de l'utilisateur
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -79,5 +96,15 @@ class User
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getName()
+    {
+        return "$this->firstName $this->lastName";
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 }

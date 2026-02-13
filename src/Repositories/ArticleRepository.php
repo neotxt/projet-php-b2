@@ -48,7 +48,7 @@ class ArticleRepository implements Repository
             return null;
         }
 
-        return $this->dataToArticle($articleData);
+        return $this->dataToObject($articleData);
     }
 
     public function update(object $article)
@@ -94,23 +94,23 @@ class ArticleRepository implements Repository
     {
         $articleObjects = [];
         foreach ($articlesData as $article) {
-            $articleObjects[] = $this->dataToArticle($article);
+            $articleObjects[] = $this->dataToObject($article);
         }
         return $articleObjects;
     }
 
-    private function dataToArticle(array $articleData)
+    private function dataToObject(array $articleData)
     {
         return new Article(
             $articleData['id'],
-            $articleData['id_vendeur'],
-            $articleData['titre'],
+            $articleData['seller_id'],
+            $articleData['title'],
             $articleData['description'],
-            $articleData['prix'],
-            $articleData['categorie'],
-            $articleData['taille'],
-            $articleData['marque'],
-            $articleData['etat'],
+            $articleData['price'],
+            $articleData['category'],
+            $articleData['size'],
+            $articleData['brand'],
+            $articleData['condition'],
             $articleData['image']
         );
     }

@@ -95,10 +95,6 @@ ADD FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE;
 -- 1. Insérer les rôles
 INSERT INTO Roles (role_name) VALUES ('vendeur'), ('acheteur');
 
--- 2. Créer un utilisateur (Vendeur ID 1)
-INSERT INTO Users (id, last_name, first_name, email, password) 
-VALUES (1, 'Vendeur', 'Test', 'vendeur@test.com', '$2y$10$C.W..'); 
-
 -- 3. Insérer les articles
 INSERT INTO Articles (seller_id, title, description, price, category, size, brand, `condition`, image) VALUES
 (1, 'jean Slim', 'jean slim bleu', 10.99, 'pantalon', 'M', 'Levi\'s', 'bon état', 'https://tse3.mm.bing.net/th/id/OIP._W2bBZPojv_7wUhRHOTTCAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3'),

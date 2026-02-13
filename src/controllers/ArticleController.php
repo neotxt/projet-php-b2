@@ -6,6 +6,8 @@ use Services\ArticleService;
 
 use Exception;
 
+use Utils\Logger;
+
 class ArticleController
 {
     private ArticleService $articleService;
@@ -20,6 +22,7 @@ class ArticleController
         try {
             $articles = $this->articleService->getAllArticles();
         } catch (Exception $e) {
+            Logger::warn("Aucun article n'a été trouvé", ['error' => $e->getMessage()]);
             $articles = [];
         }
         require_once 'src/views/front/articles.php';
@@ -41,6 +44,36 @@ class ArticleController
             exit();
         }
     }
+    public function displayVente()
+    {
+        if (empty($_SESSION['user_id'])) {
+            $_SESSION['error'] = "Vous devez être connecté pour vendre un article.";
+            header('Location: index.php?page=connexion');
+            exit();
+        }
+        require_once 'src/views/front/vente.php';
+    }
+
+    public function submitVendre()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?page=vente');
+            exit();
+        }
+        try {
+            $newId = $this->articleService->createArticle($_POST, $_FILES['image']);
+
+            $_SESSION['success'] = "Votre article est en ligne !";
+            header('Location: index.php?page=details-produit&id=' . $newId);
+            exit();
+
+        } catch (Exception $e) {
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: index.php?page=vente');
+            exit();
+        }
+    }
+
 
     public function deleteArticle()
     {

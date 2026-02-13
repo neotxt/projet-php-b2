@@ -18,7 +18,7 @@ class UserRegistrationValidator
     {
         $this->validateRequiredFields($userData);
         $this->validateEmail($userData['email']);
-        $this->validatePassword($userData['password'], $userData['confirmPassword']);
+        $this->validatePassword($userData['password'], $userData['confirm_password']);
     }
 
     /**
@@ -30,11 +30,11 @@ class UserRegistrationValidator
     private function validateRequiredFields(array $userData): void
     {
         if (
-            empty($userData['lastName'] ?? '') ||
-            empty($userData['firstName'] ?? '') ||
+            empty($userData['last_name'] ?? '') ||
+            empty($userData['first_name'] ?? '') ||
             empty($userData['email'] ?? '') ||
             empty($userData['password'] ?? '') ||
-            empty($userData['confirmPassword'] ?? '')
+            empty($userData['confirm_password'] ?? '')
         ) {
             throw new Exception("Tous les champs doivent être remplis");
         }

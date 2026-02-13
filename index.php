@@ -20,6 +20,7 @@ use Repositories\ArticleRepository;
 
 use Validators\UserRegistrationValidator;
 use Validators\UserConnexionValidator;
+use Validators\ArticleImageValidator;
 
 use Services\UserService;
 use Services\ArticleService;
@@ -40,7 +41,8 @@ $userService = new UserService($userRepository, $userRegistrationValidator, $use
 $userController = new UserController($userService);
 
 $articleRepository = new ArticleRepository($database->getConnection());
-$articleService = new ArticleService($articleRepository);
+$articleImageValidator = new ArticleImageValidator();
+$articleService = new ArticleService($articleRepository, $articleImageValidator);
 $articleController = new ArticleController($articleService);
 
 $pageController = new PageController($articleService, $userService);
@@ -60,10 +62,13 @@ if ($action) {
         case 'logout':
             $userController->logoutUser();
             exit();
-        case 'supprimer_article':
-            $articleController->deleteArticle();
+        case 'submit_vendre':
+            $articleController->submitVendre();
             exit();
-        case 'ajouter_panier':
+        case 'supprimer_article':
+            $articleController->deleteArticle(); // On demande au Controller de supprimer
+            exit();
+        case 'ajouter_au_panier':
             $panierController->ajouterAuPanier();
             exit();
         case 'supprimer_panier':
@@ -97,7 +102,7 @@ switch ($page) {
         $pageController->displayAPropos();
         break;
     case 'vente':
-        include_once 'src/views/front/vente.php';
+        $articleController->displayVente();
         break;
     case 'mes-articles':
         include_once 'src/views/front/mes-articles.php';

@@ -3,7 +3,7 @@ include_once 'src/views/partials/header.php';
 ?>
 
 <style>
- body {
+    body {
         background-color: var(--cream-bg) !important;
     }
 
@@ -40,16 +40,16 @@ include_once 'src/views/partials/header.php';
                 </div>
             <?php endif; ?>
 
-            
+
             <form action="index.php?action=submit_register" method="POST">
                 <div class="mb-2">
                     <label>Nom</label>
-                    <input type="text" name="lastName" class="form-control" required>
+                    <input type="text" name="last_name" class="form-control" required>
                 </div>
 
                 <div class="mb-2">
                     <label>Prénom</label>
-                    <input type="text" name="firstName" class="form-control" required>
+                    <input type="text" name="first_name" class="form-control" required>
                 </div>
 
                 <div class="mb-2">
@@ -64,7 +64,7 @@ include_once 'src/views/partials/header.php';
 
                 <div class="mb-3">
                     <label>Confirmer le mot de passe</label>
-                    <input type="password" name="confirmPassword" class="form-control" required>
+                    <input type="password" name="confirm_password" class="form-control" required>
                 </div>
 
                 <button type="submit" class="btn btn-custom w-100">
@@ -74,7 +74,7 @@ include_once 'src/views/partials/header.php';
 
             <p class="text-center mt-3">
                 Déjà un compte ?
-               <a href="index.php?page=login">Connectez-vous</a>
+                <a href="index.php?page=login">Connectez-vous</a>
             </p>
         </div>
     </div>

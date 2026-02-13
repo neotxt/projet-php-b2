@@ -32,7 +32,7 @@ class UserService
      * @throws Exception
      * @return void
      */
-    public function userRegister(array $userData): void
+    public function userRegister(array $userData): User
     {
         $userData = array_map('trim', $userData);
 
@@ -47,26 +47,33 @@ class UserService
 
 
         $user = new User(
-            $userData['lastName'],
-            $userData['firstName'],
+            0,
+            $userData['last_name'],
+            $userData['first_name'],
             $userData['email'],
             $hashedPassword
         );
 
-        $creation = $this->userRepository->create($user);
 
-        if (!$creation) {
+
+        $newId = $this->userRepository->create($user);
+
+        if (!$newId) {
             throw new Exception("Votre compte n'a pas pu être créé, réessayez.");
         }
+
+        $user->setId($newId);
+
+        return $user;
     }
 
     /**
      * Vérifie les identifiants de connexion d'un utilisateur.
      * @param array $userData
      * @throws Exception
-     * @return array
+     * @return User
      */
-    public function userConnexion(array $userData): array
+    public function userConnexion(array $userData): User
     {
         $userData = array_map('trim', $userData);
 
@@ -74,7 +81,8 @@ class UserService
 
         $user = $this->userRepository->readByEmail($userData['email']);
 
-        if ($user && password_verify($userData['password'], $user['password'])) {
+
+        if ($user && password_verify($userData['password'], $user->getPassword())) {
             return $user;
         } else {
             throw new Exception("Email ou mot de passe incorrect.");

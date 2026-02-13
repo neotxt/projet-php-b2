@@ -18,20 +18,20 @@ class ArticleRepository implements Repository
 
     public function create(object $article)
     {
-        $sql = "INSERT INTO Articles (id_vendeur, titre, description, prix, categorie, taille, marque, etat, image)
-                VALUES (:id_vendeur, :titre, :description, :prix, :categorie, :taille, :marque, :etat, :image)";
+        $sql = "INSERT INTO Articles (seller_id, title, description, price, category, size, brand, `condition`, image)
+                VALUES (:seller_id, :title, :description, :price, :category, :size, :brand, :condition, :image)";
 
         $stmt = $this->db->prepare($sql);
 
         $stmt->execute([
-            'id_vendeur' => $article->getIdSeller(),
-            'titre' => $article->getTitle(),
+            'seller_id' => $article->getSellerId(),
+            'title' => $article->getTitle(),
             'description' => $article->getDescription(),
-            'prix' => $article->getPrice(),
-            'categorie' => $article->getCategory(),
-            'taille' => $article->getSize(),
-            'marque' => $article->getMarque(),
-            'etat' => $article->getState(),
+            'price' => $article->getPrice(),
+            'category' => $article->getCategory(),
+            'size' => $article->getSize(),
+            'brand' => $article->getBrand(),
+            'condition' => $article->getCondition(),
             'image' => $article->getImagePath()
         ]);
 
@@ -64,9 +64,9 @@ class ArticleRepository implements Repository
     public function getLastsArticles(int $limit = 12)
     {
         $sql = 'SELECT *
-            FROM Articles
-            ORDER BY publish_date DESC
-            LIMIT :limit';
+                FROM Articles
+                ORDER BY publish_date DESC
+                LIMIT :limit';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();

@@ -44,7 +44,7 @@ class Article
         return $this->id;
     }
 
-    public function getIdSeller()
+    public function getSellerId()
     {
         return $this->idSeller;
     }
@@ -86,6 +86,11 @@ class Article
     public function getImagePath(): string
     {
         return $this->imagePath;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 }
 

@@ -64,9 +64,9 @@ class ArticleRepository implements Repository
     public function getLastsArticles(int $limit = 12)
     {
         $sql = 'SELECT *
-                FROM Articles
-                ORDER BY date_publication DESC
-                LIMIT :limit';
+            FROM Articles
+            ORDER BY publish_date DESC
+            LIMIT :limit';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();

@@ -48,8 +48,20 @@ $totalTTC = $sousTotalHT + $tva;
     }
 </style>
 
+
 <div class="container my-5">
     <h1 class="mb-5 text-center text-md-start fw-bold">Mon Panier</h1>
+
+    <?php if (!empty($_SESSION['success'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+        </div>
+    <?php endif; ?>
 
     <div class="row g-4 g-lg-5">
         <div class="col-12 col-lg-8">
@@ -59,7 +71,6 @@ $totalTTC = $sousTotalHT + $tva;
                         <tr>
                             <th scope="col" class="py-3 ps-3">Produit</th>
                             <th scope="col" class="py-3">Prix</th>
-                            <th scope="col" class="py-3 text-center">Quantité</th>
                             <th scope="col" class="py-3">Total</th>
                             <th scope="col" class="py-3"></th>
                         </tr>
@@ -91,14 +102,11 @@ $totalTTC = $sousTotalHT + $tva;
                                         </div>
                                     </td>
                                     <td><?= number_format($item->getPrice(), 2, ',', ' ') ?> €</td>
-                                    <td style="min-width: 100px;">
-                                        <input type="number" class="form-control form-control-sm text-center mx-auto" style="width: 60px;" value="1" readonly>
-                                    </td>
                                     <td class="fw-bold"><?= number_format($item->getPrice(), 2, ',', ' ') ?> €</td>
                                     <td class="text-end pe-3">
-                                        <a href="index.php?page=supprimer-panier&id=<?= $item->getId() ?>" 
-                                           class="btn btn-sm btn-outline-danger border-0" 
-                                           title="Supprimer l'article">
+                                                     <a href="index.php?action=supprimer_panier&id=<?= $item->getId() ?>" 
+                                                         class="btn btn-sm btn-outline-danger border-0" 
+                                                         title="Supprimer l'article">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                                                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                                             </svg>
@@ -132,7 +140,7 @@ $totalTTC = $sousTotalHT + $tva;
                     </div>
                     <div class="d-flex justify-content-between mb-4 text-muted">
                         <span>Livraison</span>
-                        <span class="text-success fw-bold">Offerte</span>
+                        <span class="text-success fw-bold">Payante</span>
                     </div>
 
                     <hr class="my-4">
@@ -142,9 +150,11 @@ $totalTTC = $sousTotalHT + $tva;
                         <span class="fw-bold fs-4 text-total"><?= number_format($totalTTC, 2, ',', ' ') ?> €</span>
                     </div>
 
-                    <button class="btn btn-checkout btn-lg w-100 py-3 fw-bold rounded-3 shadow-sm" <?= empty($articlesPanier) ? 'disabled' : '' ?>>
+                    <!-- Le bouton ne permet pas la navigation, on le remplace par un lien stylisé -->
+                    <!-- Lien simple vers la page paiement, désactivé si panier vide -->
+                    <a href="<?= !empty($articlesPanier) ? 'index.php?page=paiement' : '#' ?>" class="btn btn-checkout btn-lg w-100 py-3 fw-bold rounded-3 shadow-sm <?= empty($articlesPanier) ? 'disabled' : '' ?>">
                         Passer au paiement
-                    </button>
+                    </a>
 
                     <div class="text-center mt-3 small text-muted">
                         Paiement 100% sécurisé

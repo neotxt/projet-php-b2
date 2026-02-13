@@ -1,7 +1,7 @@
 <?php
 include_once 'src/views/partials/header.php';
 
-$articlesPanier = $articlesPanier ?? [];
+$articlesPanier = $_SESSION['panier'] ?? [];
 $sousTotalHT = 0;
 
 if (!empty($articlesPanier)) {

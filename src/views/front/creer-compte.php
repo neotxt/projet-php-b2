@@ -44,12 +44,12 @@ include_once 'src/views/partials/header.php';
             <form action="index.php?action=submit_register" method="POST">
                 <div class="mb-2">
                     <label>Nom</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <input type="text" name="lastName" class="form-control" required>
                 </div>
 
                 <div class="mb-2">
                     <label>Prénom</label>
-                    <input type="text" name="prenom" class="form-control" required>
+                    <input type="text" name="firstName" class="form-control" required>
                 </div>
 
                 <div class="mb-2">

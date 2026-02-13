@@ -40,7 +40,7 @@ include_once 'src/views/partials/header.php';
                     <p><?= htmlspecialchars($article->getDescription()) ?></p>
                 </div>
 
-                <a href="index.php?page=ajouter-panier&id=<?= $article->getId() ?>" class="btn btn-dark btn-lg w-100 py-3 fw-bold">
+                <a href="index.php?action=ajouter_panier&id=<?= $article->getId() ?>" class="btn btn-dark btn-lg w-100 py-3 fw-bold">
                     Ajouter au panier
                 </a>
                 

@@ -61,20 +61,32 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
+                    <li class="nav-item me-3">
                         <a class="nav-link" href="index.php?page=accueil">Accueil</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item me-3">
                         <a class="nav-link" href="index.php?page=articles">Articles</a>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item me-3">
                         <a class="nav-link" href="index.php?page=mes-articles">Mon Vide Dressing</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item me-3">
                         <a class="nav-link" href="index.php?page=a-propos">Qui sommes-nous ?</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="index.php?page=panier">Panier</a>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link me-lg-3 d-inline-flex align-items-center position-relative" href="index.php?page=panier" style="padding-right: 1.8em;">
+                            Panier
+                            <?php
+                                $nbArticles = isset($_SESSION['panier']) ? count($_SESSION['panier']) : 0;
+                                if ($nbArticles > 0) {
+                            ?>
+                                
+                                <span class="badge bg-danger text-white rounded-circle position-absolute" style="right:0.2em; top:0.2em; min-width:1.3em; height:1.3em; font-size:0.9em; display:flex; align-items:center; justify-content:center; z-index:2;">
+                                    <?= $nbArticles ?>
+                                </span>
+                                
+                            <?php } ?>
+                        </a>
                     </li>
                     
                     <li class="nav-item dropdown">

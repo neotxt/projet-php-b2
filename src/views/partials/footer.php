@@ -27,7 +27,10 @@
                 <div class="col-12 col-md-4 mb-4 mb-md-0 text-center text-md-start">
                     <span class="fw-bold fs-4" style="color: #ffffff;">LOGO</span>
                     <p class="small mt-2" style="color: rgba(249, 247, 242, 0.6);">
-                        © 2026 Boutique de Mode. <br class="d-md-none"> Tous droits réservés.
+                        <a href="" target="_blank" style="text-decoration: underline; color: inherit; font-size:0.9em;">
+                            © 2026 Boutique de Mode. <br class="d-md-none"> Tous droits réservés.
+                        </a>
+                        <br>
                     </p>
                 </div>
 

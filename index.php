@@ -27,6 +27,7 @@ use Services\ArticleService;
 use Controllers\UserController;
 use Controllers\ArticleController;
 use Controllers\PageController;
+use Controllers\PanierController;
 
 session_start();
 
@@ -43,6 +44,7 @@ $articleService = new ArticleService($articleRepository);
 $articleController = new ArticleController($articleService);
 
 $pageController = new PageController($articleService, $userService);
+$panierController = new PanierController($articleService);
 
 $page = $_GET['page'] ?? 'accueil';
 $action = $_GET['action'] ?? '';
@@ -58,10 +60,16 @@ if ($action) {
         case 'logout':
             $userController->logoutUser();
             exit();
-        default:
-            exit();
         case 'supprimer_article':
-            $articleController->deleteArticle(); // On demande au Controller de supprimer
+            $articleController->deleteArticle();
+            exit();
+        case 'ajouter_panier':
+            $panierController->ajouterAuPanier();
+            exit();
+        case 'supprimer_panier':
+            $panierController->supprimerDuPanier();
+            exit();
+        default:
             exit();
     }
 }
@@ -80,7 +88,7 @@ switch ($page) {
         $userController->displayConnexion();
         break;
     case 'panier':
-        $pageController->displayPanier();
+        $panierController->afficherPanier();
         break;
     case 'paiement':
         include_once 'src/views/front/paiement.php';

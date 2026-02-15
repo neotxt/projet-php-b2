@@ -52,7 +52,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar border-bottom border-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.php?page=accueil">LOGO</a>
+            <a class="navbar-brand fw-bold" href="index.php?page=accueil">EcoFit</a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

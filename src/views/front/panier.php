@@ -168,3 +168,4 @@ $totalTTC = $sousTotalHT + $tva;
 <?php
 include_once 'src/views/partials/footer.php';
 ?>
+

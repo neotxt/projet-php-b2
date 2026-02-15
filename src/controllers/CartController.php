@@ -5,7 +5,7 @@ namespace Controllers;
 use Services\ArticleService;
 use Exception;
 
-class PanierController
+class CartController
 {
     private ArticleService $articleService;
 

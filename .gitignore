@@ -4,7 +4,7 @@ logs/*
 
 # images des articles
 src/public/uploads/*
-!src/public/uploads/.gitkeep
+!src/public/articles/.gitkeep
 
 # fichiers systèmes
 .DS_Store

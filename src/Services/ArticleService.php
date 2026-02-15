@@ -97,4 +97,9 @@ class ArticleService
 
         return $targetPath;
     }
+
+    public function deleteArticle()
+    {
+
+    }
 }

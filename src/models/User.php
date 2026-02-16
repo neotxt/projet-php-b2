@@ -2,13 +2,8 @@
 
 namespace Models;
 
-/**
- * Représente un utilisateur
- * Elle permet de manipuler les données d'un utilisateur
- */
 class User
 {
-
     /**
      * @var int
      */
@@ -34,23 +29,28 @@ class User
      */
     private string $password;
 
+    /**
+     * @var bool
+     */
+    private bool $isAdmin;
 
     /**
      * Initialise un nouvel objet User.
-     *
      * @param int $id
      * @param string $lastName
      * @param string $firstName
      * @param string $email
      * @param string $password
+     * @param bool $isAdmin
      */
-    public function __construct(int $id, string $lastName, string $firstName, string $email, string $password)
+    public function __construct(int $id, string $lastName, string $firstName, string $email, string $password, bool $isAdmin = false)
     {
         $this->id = $id;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
         $this->email = $email;
         $this->password = $password;
+        $this->isAdmin = $isAdmin;
     }
 
     /**
@@ -98,9 +98,20 @@ class User
         return $this->password;
     }
 
+
     public function getName()
     {
         return "$this->firstName $this->lastName";
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setAdmin(bool $isAdmin): void
+    {
+        $this->isAdmin = $isAdmin;
     }
 
     public function setId(int $id)

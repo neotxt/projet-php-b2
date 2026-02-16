@@ -51,7 +51,8 @@ class UserService
             $userData['last_name'],
             $userData['first_name'],
             $userData['email'],
-            $hashedPassword
+            $hashedPassword,
+            false // Par défaut, un nouvel utilisateur n'est pas admin
         );
 
 
@@ -87,5 +88,11 @@ class UserService
         } else {
             throw new Exception("Email ou mot de passe incorrect.");
         }
+    }
+
+
+    public function deleteUser(int $id): void
+    {
+        $this->userRepository->deleteUser($id);
     }
 }

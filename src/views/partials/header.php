@@ -52,7 +52,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar border-bottom border-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.php?page=accueil">EcoFit</a>
+            <a class="navbar-brand fw-bold" href="index.php?page=accueil">
+                <img src="src/public/img/logo.png" alt="Logo" style="height:40px; width:auto; vertical-align:middle;">
+            </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +72,11 @@
                     <li class="nav-item me-3">
                         <a class="nav-link" href="index.php?page=mes-articles">Mon Vide Dressing</a>
                     </li>
+                    <?php if (!empty($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <li class="nav-item me-3">
+                        <a class="nav-link text-warning fw-bold" href="index.php?page=admin">Espace Admin</a>
+                    </li>
+                    <?php endif; ?>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="index.php?page=a-propos">Qui sommes-nous ?</a>
                     </li>

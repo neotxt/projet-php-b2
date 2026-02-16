@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4 mb-4 mb-md-0 text-center text-md-start">
-                    <span class="fw-bold fs-4" style="color: #ffffff;">EcoFit</span>
+                    <img src="src/public/img/logo.png" alt="Logo" style="height:40px; width:auto; vertical-align:middle;">
                     <p class="small mt-2" style="color: rgba(249, 247, 242, 0.6);">
                         <a href="" target="_blank" style="text-decoration: underline; color: inherit; font-size:0.9em;">
                             © 2026 EcoFit. <br class="d-md-none"> Tous droits réservés.

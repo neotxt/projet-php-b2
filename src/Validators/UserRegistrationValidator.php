@@ -76,7 +76,7 @@ class UserRegistrationValidator
     private function validatePasswordStrength(string $password): void
     {
         if (
-            strlen($password) < 12 ||
+            strlen($password) < 6 ||
             !preg_match('/[A-Z]/', $password) ||
             !preg_match('/[a-z]/', $password) ||
             !preg_match('/\d/', $password) ||

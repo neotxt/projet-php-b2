@@ -59,7 +59,10 @@ class ArticleRepository implements Repository
 
     public function delete(int $id)
     {
-        // Supprime un article dans la bdd
+        // Supprime un article de la bdd
+        $sql = 'DELETE FROM Articles WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
     }
 
     public function getLastsArticles(int $limit = 12)

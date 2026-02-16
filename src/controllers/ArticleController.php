@@ -3,9 +3,7 @@
 namespace Controllers;
 
 use Services\ArticleService;
-
 use Exception;
-
 use Utils\Logger;
 
 class ArticleController
@@ -95,20 +93,54 @@ class ArticleController
 
     public function deleteArticle()
     {
-        if (!isset($_GET['id']) || empty($_GET['id'])) {
+        // Pour suppression admin ou user
+        $articleId = $_GET['id'] ?? $_POST['id'] ?? null;
+        if (!$articleId) {
             $_SESSION['error'] = "ID article manquant";
             header('Location: index.php?page=mes-articles');
             exit();
         }
 
-        $id = $_GET['id'];
+        // Si admin, il peut tout supprimer. Sinon, vérifier que l'article appartient à l'utilisateur
+        $isAdmin = !empty($_SESSION['is_admin']) && $_SESSION['is_admin'];
+        if (!$isAdmin) {
+            // Vérifier que l'article appartient à l'utilisateur
+            $article = $this->articleService->getArticleById($articleId);
+            if (!$article || $article->getSellerId() != $_SESSION['user_id']) {
+                $_SESSION['error'] = "Vous n'avez pas le droit de supprimer cet article.";
+                header('Location: index.php?page=mes-articles');
+                exit();
+            }
+        }
+
         try {
-            $this->articleService->deleteArticle($id);
+            $this->articleService->deleteArticle($articleId);
             $_SESSION['success'] = "Article supprimé avec succès";
         } catch (Exception $e) {
             $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
         }
-        header('Location: index.php?page=mes-articles');
+        // Redirection différente si admin ou user
+        if ($isAdmin) {
+            header('Location: index.php?page=articles');
+        } else {
+            header('Location: index.php?page=mes-articles');
+        }
         exit();
     }
+
+        public function displayAdmin()
+        {
+            if (empty($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+                $_SESSION['error'] = "Accès réservé à l'administrateur.";
+                header('Location: index.php?page=accueil');
+                exit();
+            }
+            $articles = $this->articleService->getAllArticles();
+
+            // Récupérer tous les utilisateurs pour la gestion admin
+            $userRepository = new \Repositories\UserRepository((new \Config\Database())->getConnection());
+            $users = $userRepository->getAll();
+
+            require_once 'src/views/front/admin.php';
+        }
 }

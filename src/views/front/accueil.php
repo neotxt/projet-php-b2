@@ -58,7 +58,7 @@ include_once 'src/views/partials/header.php';
 
 <section class="home-banner text-white p-5 text-center shadow-sm">
     <div class="container py-5">
-        <h1 class="display-3 fw-bold">EcoFit - Achetez, vendez, réinventez.</h1>
+        <h1 class="display-3 fw-bold"> Achetez, vendez, réinventez.</h1>
         <p class="lead fs-3">Découvrez les produits du moment</p>
         <a href="index.php?page=articles" class="btn btn-light btn-lg mt-3 px-4 rounded-pill">Voir les articles</a>
     </div>

@@ -106,6 +106,7 @@ class ArticleService
         }
 
         return $targetPath;
+    
     }
 
     public function getAllCategories(): array
@@ -117,9 +118,8 @@ class ArticleService
     {
         return $this->articleRepository->getAllSizes();
     }
-
-    public function deleteArticle()
+    public function deleteArticle(int $id)
     {
-
+        $this->articleRepository->delete($id);
     }
 }

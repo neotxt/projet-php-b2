@@ -68,6 +68,9 @@ if ($action) {
         case 'supprimer_article':
             $articleController->deleteArticle(); // On demande au Controller de supprimer
             exit();
+        case 'supprimer_user':
+            $userController->deleteUser();
+            exit();
         case 'ajouter_au_panier':
             $cartController->ajouterAuPanier();
             exit();
@@ -106,6 +109,9 @@ switch ($page) {
         break;
     case 'mes-articles':
         include_once 'src/views/front/mes-articles.php';
+        break;
+    case 'admin':
+        $articleController->displayAdmin();
         break;
     case 'accueil':
     default:

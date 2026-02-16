@@ -186,75 +186,6 @@ $totalFinal = $totalTTC + $fraisLivraison;
                         </div>
                     </section>
 
-                    <section class="mb-5">
-                        <h3 class="section-title"> Mode de livraison</h3>
-
-                        <div class="payment-method mb-3 selected" onclick="selectShipping(this)">
-                            <div class="d-flex align-items-center">
-                                <input type="radio" name="livraison" value="standard" id="standard" checked>
-                                <label for="standard" class="ms-3 mb-0 flex-grow-1">
-                                    <strong>Livraison standard (5-7 jours)</strong>
-                                    <div class="text-muted small">Colissimo - Suivi de colis</div>
-                                </label>
-                                <span class="fw-bold">5,90 €</span>
-                            </div>
-                        </div>
-
-                        <div class="payment-method" onclick="selectShipping(this)">
-                            <div class="d-flex align-items-center">
-                                <input type="radio" name="livraison" value="express" id="express">
-                                <label for="express" class="ms-3 mb-0 flex-grow-1">
-                                    <strong>Livraison express (2-3 jours)</strong>
-                                    <div class="text-muted small">Chronopost - Livraison rapide</div>
-                                </label>
-                                <span class="fw-bold">12,90 €</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="mb-4">
-                        <h3 class="section-title">Méthode de paiement</h3>
-
-                        <div class="payment-method mb-3 selected" onclick="selectPayment(this)">
-                            <div class="d-flex align-items-center">
-                                <input type="radio" name="payment_method" value="carte" id="carte" checked>
-                                <label for="carte" class="ms-3 mb-0">
-                                    <strong>Carte bancaire</strong>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div id="carteForm" class="mt-3 ms-5">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label for="cardNumber" class="form-label">Numéro de carte *</label>
-                                    <input type="text" class="form-control" id="cardNumber" name="card_number"
-                                        placeholder="1234 5678 9012 3456" maxlength="19" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="cardExpiry" class="form-label">Date d'expiration *</label>
-                                    <input type="text" class="form-control" id="cardExpiry" name="card_expiry"
-                                        placeholder="MM/AA" maxlength="5" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="cardCVC" class="form-label">CVV *</label>
-                                    <input type="text" class="form-control" id="cardCVC" name="card_cvc"
-                                        placeholder="123" maxlength="3" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="payment-method mt-3" onclick="selectPayment(this)">
-                            <div class="d-flex align-items-center">
-                                <input type="radio" name="payment_method" value="paypal" id="paypal">
-                                <label for="paypal" class="ms-3 mb-0">
-                                    <strong>PayPal</strong>
-                                    <div class="text-muted small">Vous serez redirigé vers PayPal</div>
-                                </label>
-                            </div>
-                        </div>
-                    </section>
-
                     <div class="form-check mb-4">
                         <input class="form-check-input" type="checkbox" id="cgu" required>
                         <label class="form-check-label" for="cgu">
@@ -294,24 +225,16 @@ $totalFinal = $totalTTC + $fraisLivraison;
                 <?php endif; ?>
 
                 <div class="summary-line">
-                    <span>Sous-total HT</span>
+                    <span>Sous-total</span>
                     <span><?= number_format($sousTotalHT, 2, ',', ' ') ?> €</span>
                 </div>
-                <div class="summary-line">
-                    <span>TVA (20%)</span>
-                    <span><?= number_format($tva, 2, ',', ' ') ?> €</span>
-                </div>
-                <div class="summary-line">
-                    <span>Frais de livraison</span>
-                    <span id="fraisLivraison"><?= number_format($fraisLivraison, 2, ',', ' ') ?> €</span>
-                </div>
                 <div class="summary-line total">
-                    <span>Total TTC</span>
+                    <span>Total</span>
                     <span id="totalFinal"><?= number_format($totalFinal, 2, ',', ' ') ?> €</span>
                 </div>
 
                 <div class="mt-4 p-3 bg-white rounded">
-                    <h6 class="fw-bold mb-3" style="color: var(--forest-green);">✨ Vos avantages</h6>
+                    <h6 class="fw-bold mb-3" style="color: var(--forest-green);">Vos avantages</h6>
                     <ul class="list-unstyled mb-0 small">
                         <li class="mb-2">✓ Retour gratuit sous 30 jours</li>
                         <li class="mb-2">✓ Service client 7j/7</li>
@@ -357,15 +280,12 @@ $totalFinal = $totalTTC + $fraisLivraison;
         var frais = value === 'express' ? 12.90 : 5.90;
 
         var sousTotalHT = <?= $sousTotalHT ?>;
-        var tva = <?= $tva ?>;
-        var totalTTC = sousTotalHT + tva + frais;
+        var totalFinal = sousTotalHT;
 
-        document.getElementById('fraisLivraison').textContent = frais.toFixed(2).replace('.', ',') + ' €';
-        document.getElementById('totalFinal').textContent = totalTTC.toFixed(2).replace('.', ',') + ' €';
-        document.querySelector('.btn-pay').innerHTML = '🔒 Payer ' + totalTTC.toFixed(2).replace('.', ',') + ' €';
+        document.getElementById('totalFinal').textContent = totalFinal.toFixed(2).replace('.', ',') + ' €';
+        document.querySelector('.btn-pay').innerHTML = '🔒 Payer ' + totalFinal.toFixed(2).replace('.', ',') + ' €';
 
-        document.getElementById('frais_livraison_input').value = frais.toFixed(2);
-        document.getElementById('total_final_input').value = totalTTC.toFixed(2);
+        document.getElementById('total_final_input').value = totalFinal.toFixed(2);
     }
 
     document.getElementById('cardNumber').addEventListener('input', function (e) {

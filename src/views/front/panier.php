@@ -9,8 +9,7 @@ if (!empty($articlesPanier)) {
         $sousTotalHT += $item->getPrice();
     }
 }
-$tva = $sousTotalHT * 0.20;
-$totalTTC = $sousTotalHT + $tva;
+$totalTTC = $sousTotalHT;
 // --------------------------------------------
 ?>
 
@@ -131,22 +130,14 @@ $totalTTC = $sousTotalHT + $tva;
                     <h5 class="card-title mb-4 fw-bold">Résumé de la commande</h5>
 
                     <div class="d-flex justify-content-between mb-2 text-muted">
-                        <span>Sous-total HT</span>
+                        <span>Sous-total</span>
                         <span><?= number_format($sousTotalHT, 2, ',', ' ') ?> €</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2 text-muted">
-                        <span>TVA (20%)</span>
-                        <span><?= number_format($tva, 2, ',', ' ') ?> €</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-4 text-muted">
-                        <span>Livraison</span>
-                        <span class="text-success fw-bold">Payante</span>
                     </div>
 
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between mb-4">
-                        <span class="fw-bold fs-5">Total TTC</span>
+                        <span class="fw-bold fs-5">Total</span>
                         <span class="fw-bold fs-4 text-total"><?= number_format($totalTTC, 2, ',', ' ') ?> €</span>
                     </div>
 

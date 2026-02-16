@@ -42,8 +42,8 @@ class UserRepository implements Repository
      */
     public function create(object $user): int
     {
-        $sql = "INSERT INTO Users (last_name, first_name, email, password)
-                VALUES (:last_name, :first_name, :email, :password)";
+        $sql = "INSERT INTO Users (last_name, first_name, email, password, is_admin)
+                VALUES (:last_name, :first_name, :email, :password, :is_admin)";
 
         $stmt = $this->db->prepare($sql);
 
@@ -51,7 +51,8 @@ class UserRepository implements Repository
             'last_name' => $user->getLastName(),
             'first_name' => $user->getFirstName(),
             'email' => $user->getEmail(),
-            'password' => $user->getPassword()
+            'password' => $user->getPassword(),
+            'is_admin' => $user->isAdmin() ? 1 : 0
         ]);
 
         // On retourne l'ID créé pour pouvoir connecter l'utilisateur tout de suite après
@@ -131,7 +132,15 @@ class UserRepository implements Repository
             $userData['last_name'],
             $userData['first_name'],
             $userData['email'],
-            $userData['password']
+            $userData['password'],
+            isset($userData['is_admin']) ? (bool)$userData['is_admin'] : false
         );
+    }
+     
+    public function deleteUser(int $id): void
+    {
+        $sql = 'DELETE FROM Users WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
     }
 }

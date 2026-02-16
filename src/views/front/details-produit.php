@@ -43,7 +43,6 @@ include_once 'src/views/partials/header.php';
                 <a href="index.php?action=ajouter_au_panier&id=<?= $article->getId() ?>" class="btn btn-dark btn-lg w-100 py-3 fw-bold">
                     Ajouter au panier
                 </a>
-                
                 <div class="mt-3">
                     <span class="badge bg-secondary">Taille : <?= htmlspecialchars($article->getSize()) ?></span>
                 </div>

@@ -59,8 +59,10 @@ class UserController
         try {
             $user = $this->userService->userConnexion($_POST);
 
+
             $_SESSION['user_id'] = $user->getId();
             $_SESSION['user_email'] = $user->getEmail();
+            $_SESSION['is_admin'] = $user->isAdmin();
 
             Logger::info("Connexion réussie", [
                 'id' => $user->getId(),
@@ -117,5 +119,24 @@ class UserController
     public function displayCreerCompte()
     {
         require_once 'src/views/front/creer-compte.php';
+    }
+
+    public function deleteUser()
+    {
+        if (empty($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+            $_SESSION['error'] = "Accès refusé.";
+            header('Location: index.php?page=admin');
+            exit();
+        }
+        $id = $_GET['id'] ?? $_POST['id'] ?? null;
+        if (!$id) {
+            $_SESSION['error'] = "ID utilisateur manquant.";
+            header('Location: index.php?page=admin');
+            exit();
+        }
+        $this->userService->deleteUser((int)$id);
+        $_SESSION['success'] = "Utilisateur supprimé.";
+        header('Location: index.php?page=admin');
+        exit();
     }
 }

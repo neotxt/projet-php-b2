@@ -186,6 +186,27 @@ $totalFinal = $totalTTC + $fraisLivraison;
                         </div>
                     </section>
 
+                    <section class="mb-4">
+                        <h3 class="section-title">Informations de paiement</h3>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="cardNumber" class="form-label">Numéro de carte *</label>
+                                <input type="text" class="form-control" id="cardNumber" name="card_number"
+                                    placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cardExpiry" class="form-label">Date d'expiration *</label>
+                                <input type="text" class="form-control" id="cardExpiry" name="card_expiry"
+                                    placeholder="MM/AA" maxlength="5" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cardCVC" class="form-label">CVV *</label>
+                                <input type="text" class="form-control" id="cardCVC" name="card_cvc"
+                                    placeholder="123" maxlength="3" required>
+                            </div>
+                        </div>
+                    </section>
+
                     <div class="form-check mb-4">
                         <input class="form-check-input" type="checkbox" id="cgu" required>
                         <label class="form-check-label" for="cgu">
@@ -195,7 +216,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
 
                     <div class="d-grid">
                         <button type="submit" class="btn btn-pay btn-lg">
-                            Payer <?= number_format($totalFinal, 2, ',', ' ') ?> €
+                             Payer <?= number_format($totalFinal, 2, ',', ' ') ?> €
                         </button>
                     </div>
                 </form>

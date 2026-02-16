@@ -1,4 +1,15 @@
 <style>
+    :root {
+        --forest-green: #1a3020;
+        --cream-bg: #f9f7f2;
+        --gold-accent: #c4a47c;
+    }
+
+    body {
+        background-color: var(--cream-bg) !important;
+        color: var(--forest-green) !important;
+    }
+
     .mes-articles-scroll {
         display: flex;
         flex-direction: row;

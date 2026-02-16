@@ -6,6 +6,7 @@ include_once 'src/views/partials/header.php';
         --forest-green: #1a3020; /* Vert forêt du modèle */
         --cream-bg: #f9f7f2;    /* Beige crème du modèle */
         --gold-accent: #c4a47c;  /* Doré pour les interactions */
+        --soft-green: #2d5a3d;   /* Vert doux pour les sous-titres */
     }
 
     /* Changement du fond de TOUTE la page */
@@ -14,22 +15,69 @@ include_once 'src/views/partials/header.php';
     }
 
     .custom-card {
-        background-color: var(--cream-bg) !important;
-        color: var(--forest-green) !important;
+        background-color: #ffffff !important;
+        border-left: 5px solid var(--gold-accent) !important;
     }
 
-    /* Uniformisation des textes en Vert Forêt */
-    .custom-card h1, 
-    .custom-card h2, 
-    .custom-card p, 
-    .custom-card strong,
-    .custom-card .list-group-item {
+    /* Titre principal avec gradient */
+    .custom-card h1 {
         color: var(--forest-green) !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.5px;
+    }
+
+    /* Sous-titre avec couleur dorée */
+    .custom-card .lead {
+        color: var(--gold-accent) !important;
+        font-size: 1.3rem !important;
+    }
+
+    /* Titres secondaires */
+    .custom-card h2 {
+        color: var(--soft-green) !important;
+        font-weight: 700 !important;
+        border-bottom: 3px solid var(--gold-accent);
+        display: inline-block;
+        padding-bottom: 8px;
+    }
+
+    /* Texte normal */
+    .custom-card p {
+        color: #4a4a4a !important;
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    /* Mots en gras avec couleur verte */
+    .custom-card strong {
+        color: var(--forest-green) !important;
+        font-weight: 700;
+    }
+
+    /* Liste avec icônes personnalisées */
+    .custom-card .list-group-item {
+        color: var(--soft-green) !important;
+        transition: all 0.3s ease;
+        padding-left: 0;
+        font-weight: 500;
     }
 
     .custom-card .list-group-item:hover {
         color: var(--gold-accent) !important;
         transform: translateX(10px);
+    }
+
+    /* Section footer de la carte */
+    .tech-footer {
+        background: linear-gradient(135deg, var(--forest-green) 0%, var(--soft-green) 100%);
+        color: white !important;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .tech-footer p, .tech-footer strong {
+        color: white !important;
     }
 </style>
 
@@ -63,7 +111,7 @@ include_once 'src/views/partials/header.php';
                     </ul>
                 </div>
 
-                <div class="pt-4r">
+                <div class="tech-footer">
                     <p class="mb-1">Développé en <strong>PHP</strong> & <strong>SQL</strong></p>
                     <p class="mb-0">Environnement : XAMPP</p>
                 </div>

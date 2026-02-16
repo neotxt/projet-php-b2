@@ -2,6 +2,19 @@
 include_once 'src/views/partials/header.php';
 ?>
 
+<style>
+    :root {
+        --forest-green: #1a3020;
+        --cream-bg: #f9f7f2;
+        --gold-accent: #c4a47c;
+    }
+
+    body {
+        background-color: var(--cream-bg) !important;
+        color: var(--forest-green) !important;
+    }
+</style>
+
 <?php if (isset($article) && $article): ?>
 
     <div class="container my-5">

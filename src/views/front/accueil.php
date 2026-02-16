@@ -66,7 +66,7 @@ include_once 'src/views/partials/header.php';
 
 <div class="container my-5">
     <div class="text-center mb-5">
-        <h1 class="fw-bold">Bienvenue sur la boutique EcoFit</h1>
+        <h1 class="fw-bold">Bienvenue sur la boutique VestiSwap</h1>
         <p class="fs-4 opacity-75">Nos Articles</p>
     </div>
     <div class="row justify-content-center">

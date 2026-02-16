@@ -3,6 +3,19 @@
 include_once 'src/views/partials/header.php';
 ?>
 
+<style>
+    :root {
+        --forest-green: #1a3020;
+        --cream-bg: #f9f7f2;
+        --gold-accent: #c4a47c;
+    }
+
+    body {
+        background-color: var(--cream-bg) !important;
+        color: var(--forest-green) !important;
+    }
+</style>
+
 <div class="container my-5">
     <h1 class="fw-bold mb-4">Espace Administration</h1>
     <p>lieux de gestion des utilisateurs et articles</p>

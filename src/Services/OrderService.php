@@ -25,5 +25,6 @@ class OrderService
 
         );
         $this->orderRepository->create($order);
+        return $order;
     }
 }

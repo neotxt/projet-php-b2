@@ -17,6 +17,7 @@ use Config\Database;
 
 use Repositories\UserRepository;
 use Repositories\ArticleRepository;
+use Repositories\OrderRepository;
 
 use Validators\UserRegistrationValidator;
 use Validators\UserConnexionValidator;
@@ -24,11 +25,13 @@ use Validators\ArticleImageValidator;
 
 use Services\UserService;
 use Services\ArticleService;
+use Services\OrderService;
 
 use Controllers\UserController;
 use Controllers\ArticleController;
 use Controllers\PageController;
 use Controllers\CartController;
+use Controllers\OrderController;
 
 session_start();
 
@@ -45,8 +48,13 @@ $articleImageValidator = new ArticleImageValidator();
 $articleService = new ArticleService($articleRepository, $articleImageValidator);
 $articleController = new ArticleController($articleService);
 
-$pageController = new PageController($articleService, $userService);
+$orderRepository = new OrderRepository($database->getConnection());
+$orderService = new OrderService($orderRepository);
+$orderController = new OrderController($orderService);
+
 $cartController = new CartController($articleService);
+
+$pageController = new PageController($articleService, $userService);
 
 $page = $_GET['page'] ?? 'accueil';
 $action = $_GET['action'] ?? '';
@@ -77,6 +85,9 @@ if ($action) {
         case 'supprimer_panier':
             $cartController->supprimerDuPanier();
             exit();
+        case 'confirmation_commande':
+            $orderController->createOrder();
+            break;
         default:
             exit();
     }
@@ -99,7 +110,7 @@ switch ($page) {
         $cartController->afficherPanier();
         break;
     case 'paiement':
-        include_once 'src/views/front/paiement.php';
+        $pageController->displayPaiement();
         break;
     case 'a-propos':
         $pageController->displayAPropos();

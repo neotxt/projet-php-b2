@@ -1,5 +1,5 @@
 <?php
-include_once 'src/views/partials/header.php';
+include_once __DIR__ . '/../../views/partials/header.php';
 
 $articlesPanier = $_SESSION['panier'] ?? [];
 $sousTotalHT = 0;
@@ -137,7 +137,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
         <p class="text-muted">Remplissez vos informations de paiement et de livraison</p>
         <div class="d-flex justify-content-center mt-3">
             <span class="secure-badge">
-                 Paiement 100% sécurisé
+                Paiement 100% sécurisé
             </span>
         </div>
     </div>
@@ -145,15 +145,16 @@ $totalFinal = $totalTTC + $fraisLivraison;
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="payment-container p-4">
-                <form id="paymentForm" action="index.php?page=confirmation-commande" method="POST">
-                    
+                <form id="paymentForm" action="index.php?action=confirmation_commande" method="POST">
+
                     <input type="hidden" name="sous_total" value="<?= $totalTTC ?>">
-                    <input type="hidden" name="frais_livraison" id="frais_livraison_input" value="<?= $fraisLivraison ?>">
+                    <input type="hidden" name="frais_livraison" id="frais_livraison_input"
+                        value="<?= $fraisLivraison ?>">
                     <input type="hidden" name="total_final" id="total_final_input" value="<?= $totalFinal ?>">
-                    
+
                     <section class="mb-5">
                         <h3 class="section-title"> Informations de livraison</h3>
-                        
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="prenom" class="form-label">Prénom *</label>
@@ -165,11 +166,13 @@ $totalFinal = $totalTTC + $fraisLivraison;
                             </div>
                             <div class="col-12">
                                 <label for="adresse" class="form-label">Adresse *</label>
-                                <input type="text" class="form-control" id="adresse" name="adresse" placeholder="12 rue de la Paix" required>
+                                <input type="text" class="form-control" id="adresse" name="adresse"
+                                    placeholder="12 rue de la Paix" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="codePostal" class="form-label">Code postal *</label>
-                                <input type="text" class="form-control" id="codePostal" name="code_postal" pattern="[0-9]{5}" required>
+                                <input type="text" class="form-control" id="codePostal" name="code_postal"
+                                    pattern="[0-9]{5}" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="ville" class="form-label">Ville *</label>
@@ -177,14 +180,15 @@ $totalFinal = $totalTTC + $fraisLivraison;
                             </div>
                             <div class="col-12">
                                 <label for="telephone" class="form-label">Téléphone *</label>
-                                <input type="tel" class="form-control" id="telephone" name="telephone" pattern="[0-9]{10}" placeholder="0612345678" required>
+                                <input type="tel" class="form-control" id="telephone" name="telephone"
+                                    pattern="[0-9]{10}" placeholder="0612345678" required>
                             </div>
                         </div>
                     </section>
 
                     <section class="mb-5">
                         <h3 class="section-title"> Mode de livraison</h3>
-                        
+
                         <div class="payment-method mb-3 selected" onclick="selectShipping(this)">
                             <div class="d-flex align-items-center">
                                 <input type="radio" name="livraison" value="standard" id="standard" checked>
@@ -210,7 +214,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
 
                     <section class="mb-4">
                         <h3 class="section-title">Méthode de paiement</h3>
-                        
+
                         <div class="payment-method mb-3 selected" onclick="selectPayment(this)">
                             <div class="d-flex align-items-center">
                                 <input type="radio" name="payment_method" value="carte" id="carte" checked>
@@ -224,18 +228,18 @@ $totalFinal = $totalTTC + $fraisLivraison;
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="cardNumber" class="form-label">Numéro de carte *</label>
-                                    <input type="text" class="form-control" id="cardNumber" name="card_number" 
-                                           placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                    <input type="text" class="form-control" id="cardNumber" name="card_number"
+                                        placeholder="1234 5678 9012 3456" maxlength="19" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="cardExpiry" class="form-label">Date d'expiration *</label>
-                                    <input type="text" class="form-control" id="cardExpiry" name="card_expiry" 
-                                           placeholder="MM/AA" maxlength="5" required>
+                                    <input type="text" class="form-control" id="cardExpiry" name="card_expiry"
+                                        placeholder="MM/AA" maxlength="5" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="cardCVC" class="form-label">CVV *</label>
-                                    <input type="text" class="form-control" id="cardCVC" name="card_cvc" 
-                                           placeholder="123" maxlength="3" required>
+                                    <input type="text" class="form-control" id="cardCVC" name="card_cvc"
+                                        placeholder="123" maxlength="3" required>
                                 </div>
                             </div>
                         </div>
@@ -260,7 +264,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
 
                     <div class="d-grid">
                         <button type="submit" class="btn btn-pay btn-lg">
-                             Payer <?= number_format($totalFinal, 2, ',', ' ') ?> €
+                            Payer <?= number_format($totalFinal, 2, ',', ' ') ?> €
                         </button>
                     </div>
                 </form>
@@ -270,7 +274,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
         <div class="col-lg-4">
             <div class="order-summary position-sticky" style="top: 20px;">
                 <h3 class="section-title"> Récapitulatif</h3>
-                
+
                 <?php if (!empty($articlesPanier)): ?>
                     <div class="mb-3">
                         <?php foreach ($articlesPanier as $item): ?>
@@ -351,20 +355,20 @@ $totalFinal = $totalTTC + $fraisLivraison;
 
         var value = element.querySelector('input[type="radio"]').value;
         var frais = value === 'express' ? 12.90 : 5.90;
-        
+
         var sousTotalHT = <?= $sousTotalHT ?>;
         var tva = <?= $tva ?>;
         var totalTTC = sousTotalHT + tva + frais;
-        
+
         document.getElementById('fraisLivraison').textContent = frais.toFixed(2).replace('.', ',') + ' €';
         document.getElementById('totalFinal').textContent = totalTTC.toFixed(2).replace('.', ',') + ' €';
         document.querySelector('.btn-pay').innerHTML = '🔒 Payer ' + totalTTC.toFixed(2).replace('.', ',') + ' €';
-        
+
         document.getElementById('frais_livraison_input').value = frais.toFixed(2);
         document.getElementById('total_final_input').value = totalTTC.toFixed(2);
     }
 
-    document.getElementById('cardNumber').addEventListener('input', function(e) {
+    document.getElementById('cardNumber').addEventListener('input', function (e) {
         var value = e.target.value.replace(/\s/g, '');
         var formatted = '';
         for (var i = 0; i < value.length; i++) {
@@ -376,7 +380,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
         e.target.value = formatted;
     });
 
-    document.getElementById('cardExpiry').addEventListener('input', function(e) {
+    document.getElementById('cardExpiry').addEventListener('input', function (e) {
         var value = e.target.value.replace(/\D/g, '');
         if (value.length >= 2) {
             value = value.substring(0, 2) + '/' + value.substring(2, 4);
@@ -384,24 +388,24 @@ $totalFinal = $totalTTC + $fraisLivraison;
         e.target.value = value;
     });
 
-    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         if (!document.getElementById('cgu').checked) {
             alert('Veuillez accepter les conditions générales de vente');
             return;
         }
 
         if (document.getElementById('paypal').checked) {
-            alert('Redirection vers PayPal...');
-            return;
+            alert('Redirection vers PayPal... (Simulation de validation)');
+        } else {
+            alert('Paiement CB en cours de traitement...');
         }
 
-        alert('Paiement en cours de traitement...');
         this.submit();
     });
 </script>
 
 <?php
-include_once 'src/views/partials/footer.php';
+include_once __DIR__ . '/../../views/partials/footer.php';
 ?>

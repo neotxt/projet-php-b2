@@ -34,8 +34,8 @@ class PageController
         require_once 'src/views/front/a-propos.php';
     }
 
-    public function displayPanier()
+    public function displayPaiement()
     {
-        require_once 'src/views/front/panier.php';
+        require_once 'src/views/front/paiement.php';
     }
 }

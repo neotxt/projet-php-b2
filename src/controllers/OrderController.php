@@ -2,39 +2,26 @@
 
 namespace Controllers;
 
+use Services\OrderService;
 
 class OrderController
 {
-    private int $id;
-    private int $buyerId;
-    private string $orderDate;
-    private string $orderStatus;
+    private OrderService $orderService;
 
-    public function __construct(int $id, int $buyerId, string $orderStatus,string $orderDate)
+    public function __construct(OrderService $orderService)
     {
-        $this->id = $id;
-        $this->buyerId = $buyerId;
-        $this->orderStatus = $orderStatus;
-        $this->orderDate = $orderDate;
+        $this->orderService = $orderService;
     }
 
-    public function getId(): int
+    public function createOrder()
     {
-        return $this->id;
-    }
+        $orderInfo = [
+            'buyer_id' => $_SESSION['user_id'],
+            'cart' => $_SESSION['panier']
+        ];
 
-    public function getBuyerId(): int
-    {
-        return $this->buyerId;
-    }
-
-    public function getOrderDate(): string
-    {
-        return $this->orderDate;
-    }
-
-    public function getOrderStatus(): string
-    {
-        return $this->orderStatus;
+        $this->orderService->createOrder($orderInfo);
+        header('Location: index.php?page=accueil');
+        exit();
     }
 }

@@ -1,25 +1,24 @@
 <?php
 
-namespace Controllers;
+namespace Models;
 
 
-use Models\Article;
-
-class OrderController
+class Order
 {
     private int $id;
     private int $buyerId;
     private string $orderDate;
     private string $orderStatus;
 
-    private Article[] $shoppingCart;
+    private array $shoppingCart;
 
-    public function __construct(int $id, int $buyerId, string $orderStatus,string $orderDate)
+    public function __construct(int $id, int $buyerId, string $orderStatus, string $orderDate, array $shoppingCart)
     {
         $this->id = $id;
         $this->buyerId = $buyerId;
         $this->orderStatus = $orderStatus;
         $this->orderDate = $orderDate;
+        $this->shoppingCart = $shoppingCart;
     }
 
     public function getId(): int
@@ -40,5 +39,15 @@ class OrderController
     public function getOrderStatus(): string
     {
         return $this->orderStatus;
+    }
+
+    public function getShoppingCart()
+    {
+        return $this->shoppingCart;
+    }
+
+    public function setId(int $newId)
+    {
+        $this->id = $newId;
     }
 }

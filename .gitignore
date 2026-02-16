@@ -3,7 +3,7 @@ logs/*
 !logs/.gitkeep
 
 # images des articles
-src/public/uploads/*
+src/public/articles/*
 !src/public/articles/.gitkeep
 
 # fichiers systèmes

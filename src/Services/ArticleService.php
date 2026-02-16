@@ -49,6 +49,16 @@ class ArticleService
         return $lastsArticles;
     }
 
+    public function getFilteredArticles(array $filters): array
+    {
+        $articles = $this->articleRepository->findByFilters($filters);
+
+        if (!$articles) {
+        throw new Exception("Aucun article n'a été trouvé.");
+        }
+        return $articles;
+    }
+
     public function createArticle(array $articleData, array $fileData)
     {
         $this->articleImageValidator->validateImage($fileData);
@@ -96,6 +106,16 @@ class ArticleService
         }
 
         return $targetPath;
+    }
+
+    public function getAllCategories(): array
+    {
+        return $this->articleRepository->getAllCategories();
+    }
+
+    public function getAllSizes(): array
+    {
+        return $this->articleRepository->getAllSizes();
     }
 
     public function deleteArticle()

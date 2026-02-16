@@ -71,7 +71,6 @@ include_once 'src/views/partials/header.php';
 
 <div class="container my-5">
     <h1 class="text-center mb-5 fw-bold">Nos Articles</h1>
-
     <div class="row">
         <div class="col-lg-3 mb-5">
             <form action="index.php" method="GET">
@@ -83,33 +82,35 @@ include_once 'src/views/partials/header.php';
                     <div class="mb-4">
                         <p class="filter-title">Catégories</p> 
                         
-                        <div class="form-check mb-2 small">
-                            <input class="form-check-input" type="checkbox" name="categorie[]" value="pantalon" id="cat1" 
-                                <?= (isset($_GET['categorie']) && in_array('pantalon', $_GET['categorie'])) ? 'checked' : '' ?>>
-                            <label class="form-check-label" for="cat1">Jeans & Pantalons</label>
-                        </div>
-
-                        <div class="form-check mb-2 small">
-                            <input class="form-check-input" type="checkbox" name="categorie[]" value="tshirt" id="cat2"
-                                <?= (isset($_GET['categorie']) && in_array('tshirt', $_GET['categorie'])) ? 'checked' : '' ?>>
-                            <label class="form-check-label" for="cat2">T-shirts & Tops</label>
-                        </div>
+                        <?php if (!empty($categories)): ?>
+                            <?php foreach ($categories as $index => $categorie): ?>
+                                <div class="form-check mb-2 small">
+                                    <input class="form-check-input" type="checkbox" name="categorie[]" 
+                                           value="<?= htmlspecialchars($categorie) ?>" 
+                                           id="cat<?= $index ?>" 
+                                           <?= (isset($_GET['categorie']) && in_array($categorie, $_GET['categorie'])) ? 'checked' : '' ?>>
+                                    <label class="form-check-label" for="cat<?= $index ?>">
+                                        <?= htmlspecialchars(ucfirst($categorie)) ?>
+                                    </label>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-4">
                         <p class="filter-title">Taille</p>
                         <div class="d-flex flex-wrap gap-2">
-                            <input type="checkbox" class="btn-check" name="taille[]" value="S" id="sizeS"
-                                <?= (isset($_GET['taille']) && in_array('S', $_GET['taille'])) ? 'checked' : '' ?>>
-                            <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeS">S</label>
-
-                            <input type="checkbox" class="btn-check" name="taille[]" value="M" id="sizeM"
-                                <?= (isset($_GET['taille']) && in_array('M', $_GET['taille'])) ? 'checked' : '' ?>>
-                            <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeM">M</label>
-
-                             <input type="checkbox" class="btn-check" name="taille[]" value="L" id="sizeL"
-                                <?= (isset($_GET['taille']) && in_array('L', $_GET['taille'])) ? 'checked' : '' ?>>
-                            <label class="btn btn-outline-dark btn-sm rounded-0" for="sizeL">L</label>
+                            <?php if (!empty($tailles)): ?>
+                                <?php foreach ($tailles as $index => $taille): ?>
+                                    <input type="checkbox" class="btn-check" name="taille[]" 
+                                           value="<?= htmlspecialchars($taille) ?>" 
+                                           id="size<?= $index ?>"
+                                           <?= (isset($_GET['taille']) && in_array($taille, $_GET['taille'])) ? 'checked' : '' ?>>
+                                    <label class="btn btn-outline-dark btn-sm rounded-0" for="size<?= $index ?>">
+                                        <?= htmlspecialchars($taille) ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
 

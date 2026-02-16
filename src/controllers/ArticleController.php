@@ -16,15 +16,33 @@ class ArticleController
     }
 
     public function displayArticles()
+    
     {
-        try {
-            $articles = $this->articleService->getAllArticles();
-        } catch (Exception $e) {
-            Logger::warn("Aucun article n'a été trouvé", ['error' => $e->getMessage()]);
-            $articles = [];
-        }
-        require_once 'src/views/front/articles.php';
+    // Initialiser les variables par défaut
+    $articles = [];
+    $categories = [];
+    $tailles = [];
+    
+    try {
+        // Récupérer toutes les catégories et tailles disponibles
+        $categories = $this->articleService->getAllCategories();
+        $tailles = $this->articleService->getAllSizes();
+        
+        // Récupérer les filtres depuis l'URL
+        $filters = [
+            'categories' => $_GET['categorie'] ?? [],
+            'tailles' => $_GET['taille'] ?? [],
+            'prix_max' => $_GET['prix_max'] ?? 200
+        ];
+        
+        // Passer les filtres au service
+        $articles = $this->articleService->getFilteredArticles($filters);
+        
+    } catch (Exception $e) {
+        Logger::warn("Erreur lors du chargement des articles", ['error' => $e->getMessage()]);
     }
+    require_once 'src/views/front/articles.php';
+}
 
     public function displayDetailProduit()
     {

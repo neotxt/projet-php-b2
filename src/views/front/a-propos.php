@@ -65,7 +65,7 @@ include_once 'src/views/partials/header.php';
 
                 <div class="pt-4r">
                     <p class="mb-1">Développé en <strong>PHP</strong> & <strong>SQL</strong></p>
-                    <p class="mb-0">Environnement : MAMP / XAMPP</p>
+                    <p class="mb-0">Environnement : XAMPP</p>
                 </div>
 
             </div>

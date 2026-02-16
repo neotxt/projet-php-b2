@@ -147,6 +147,10 @@ $totalFinal = $totalTTC + $fraisLivraison;
             <div class="payment-container p-4">
                 <form id="paymentForm" action="index.php?page=confirmation-commande" method="POST">
                     
+                    <input type="hidden" name="sous_total" value="<?= $totalTTC ?>">
+                    <input type="hidden" name="frais_livraison" id="frais_livraison_input" value="<?= $fraisLivraison ?>">
+                    <input type="hidden" name="total_final" id="total_final_input" value="<?= $totalFinal ?>">
+                    
                     <section class="mb-5">
                         <h3 class="section-title"> Informations de livraison</h3>
                         
@@ -355,6 +359,9 @@ $totalFinal = $totalTTC + $fraisLivraison;
         document.getElementById('fraisLivraison').textContent = frais.toFixed(2).replace('.', ',') + ' €';
         document.getElementById('totalFinal').textContent = totalTTC.toFixed(2).replace('.', ',') + ' €';
         document.querySelector('.btn-pay').innerHTML = '🔒 Payer ' + totalTTC.toFixed(2).replace('.', ',') + ' €';
+        
+        document.getElementById('frais_livraison_input').value = frais.toFixed(2);
+        document.getElementById('total_final_input').value = totalTTC.toFixed(2);
     }
 
     document.getElementById('cardNumber').addEventListener('input', function(e) {

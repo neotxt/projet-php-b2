@@ -36,6 +36,12 @@ class PageController
 
     public function displayPaiement()
     {
+        if (empty($_SESSION['user_id'])) {
+            $_SESSION['error'] = "Veuillez vous connecter pour valider votre commande.";
+            header('Location: index.php?page=connexion');
+            exit();
+        }
+
         require_once 'src/views/front/paiement.php';
     }
 }

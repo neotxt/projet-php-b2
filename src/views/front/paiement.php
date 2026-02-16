@@ -201,8 +201,8 @@ $totalFinal = $totalTTC + $fraisLivraison;
                             </div>
                             <div class="col-md-6">
                                 <label for="cardCVC" class="form-label">CVV *</label>
-                                <input type="text" class="form-control" id="cardCVC" name="card_cvc"
-                                    placeholder="123" maxlength="3" required>
+                                <input type="text" class="form-control" id="cardCVC" name="card_cvc" placeholder="123"
+                                    maxlength="3" required>
                             </div>
                         </div>
                     </section>
@@ -216,7 +216,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
 
                     <div class="d-grid">
                         <button type="submit" class="btn btn-pay btn-lg">
-                             Payer <?= number_format($totalFinal, 2, ',', ' ') ?> €
+                            Payer <?= number_format($totalFinal, 2, ',', ' ') ?> €
                         </button>
                     </div>
                 </form>
@@ -269,46 +269,6 @@ $totalFinal = $totalTTC + $fraisLivraison;
 </div>
 
 <script>
-    function selectPayment(element) {
-        var methods = document.querySelectorAll('.payment-method');
-        for (var i = 0; i < methods.length; i++) {
-            methods[i].classList.remove('selected');
-        }
-        element.classList.add('selected');
-        element.querySelector('input[type="radio"]').checked = true;
-
-        var carteForm = document.getElementById('carteForm');
-        var carteRadio = document.getElementById('carte');
-        if (carteRadio.checked) {
-            carteForm.style.display = 'block';
-        } else {
-            carteForm.style.display = 'none';
-        }
-    }
-
-    function selectShipping(element) {
-        var methods = document.querySelectorAll('.payment-method');
-        for (var i = 0; i < methods.length; i++) {
-            var input = methods[i].querySelector('input[name="livraison"]');
-            if (input) {
-                methods[i].classList.remove('selected');
-            }
-        }
-        element.classList.add('selected');
-        element.querySelector('input[type="radio"]').checked = true;
-
-        var value = element.querySelector('input[type="radio"]').value;
-        var frais = value === 'express' ? 12.90 : 5.90;
-
-        var sousTotalHT = <?= $sousTotalHT ?>;
-        var totalFinal = sousTotalHT;
-
-        document.getElementById('totalFinal').textContent = totalFinal.toFixed(2).replace('.', ',') + ' €';
-        document.querySelector('.btn-pay').innerHTML = '🔒 Payer ' + totalFinal.toFixed(2).replace('.', ',') + ' €';
-
-        document.getElementById('total_final_input').value = totalFinal.toFixed(2);
-    }
-
     document.getElementById('cardNumber').addEventListener('input', function (e) {
         var value = e.target.value.replace(/\s/g, '');
         var formatted = '';
@@ -322,7 +282,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
     });
 
     document.getElementById('cardExpiry').addEventListener('input', function (e) {
-        var value = e.target.value.replace(/\D/g, '');
+        var value = e.target.value.replace(/\D/g, ''); // Enlève tout sauf les chiffres
         if (value.length >= 2) {
             value = value.substring(0, 2) + '/' + value.substring(2, 4);
         }
@@ -337,11 +297,7 @@ $totalFinal = $totalTTC + $fraisLivraison;
             return;
         }
 
-        if (document.getElementById('paypal').checked) {
-            alert('Redirection vers PayPal... (Simulation de validation)');
-        } else {
-            alert('Paiement CB en cours de traitement...');
-        }
+        alert('Paiement validé. Traitement de la commande en cours...');
 
         this.submit();
     });

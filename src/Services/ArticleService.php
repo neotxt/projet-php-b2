@@ -54,7 +54,7 @@ class ArticleService
         $articles = $this->articleRepository->findByFilters($filters);
 
         if (!$articles) {
-        throw new Exception("Aucun article n'a été trouvé.");
+            throw new Exception("Aucun article n'a été trouvé.");
         }
         return $articles;
     }
@@ -106,7 +106,7 @@ class ArticleService
         }
 
         return $targetPath;
-    
+
     }
 
     public function getAllCategories(): array
@@ -126,5 +126,10 @@ class ArticleService
     public function getArticlesByUserId(int $userId): array
     {
         return $this->articleRepository->getArticlesByUserId($userId);
+    }
+
+    public function changeArticlesStatus(int $articleId, string $status)
+    {
+        $this->articleRepository->updateStatus($articleId, $status);
     }
 }

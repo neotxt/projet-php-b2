@@ -3,16 +3,20 @@
 namespace Controllers;
 
 use Services\OrderService;
+use Services\ArticleService;
+
 use Repositories\InvoiceRepository;
 use Config\Database;
 
 class OrderController
 {
     private OrderService $orderService;
+    private ArticleService $articleService;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(OrderService $orderService, ArticleService $articleService)
     {
         $this->orderService = $orderService;
+        $this->articleService = $articleService;
     }
 
     public function createOrder()

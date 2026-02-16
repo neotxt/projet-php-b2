@@ -49,8 +49,8 @@ $articleService = new ArticleService($articleRepository, $articleImageValidator)
 $articleController = new ArticleController($articleService);
 
 $orderRepository = new OrderRepository($database->getConnection());
-$orderService = new OrderService($orderRepository);
-$orderController = new OrderController($orderService);
+$orderService = new OrderService($orderRepository, $articleRepository);
+$orderController = new OrderController($orderService, $articleService);
 
 $cartController = new CartController($articleService);
 
@@ -74,7 +74,7 @@ if ($action) {
             $articleController->submitVendre();
             exit();
         case 'supprimer_article':
-            $articleController->deleteArticle(); // On demande au Controller de supprimer
+            $articleController->deleteArticle();
             exit();
         case 'supprimer_user':
             $userController->deleteUser();

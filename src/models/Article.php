@@ -14,6 +14,7 @@ class Article
     private string $brand;
     private string $condition;
     private string $imagePath;
+    private string $status;
 
     public function __construct(
         int $id,
@@ -37,6 +38,7 @@ class Article
         $this->brand = $brand;
         $this->condition = $condition;
         $this->imagePath = $imagePath;
+        $this->status = 'en vente';
     }
 
     public function getId()
@@ -88,9 +90,19 @@ class Article
         return $this->imagePath;
     }
 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    public function setStatus(string $newStatus)
+    {
+        $this->status = $newStatus;
     }
 }
 

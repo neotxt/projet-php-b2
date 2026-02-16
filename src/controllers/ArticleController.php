@@ -128,19 +128,29 @@ class ArticleController
         exit();
     }
 
-        public function displayAdmin()
-        {
-            if (empty($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
-                $_SESSION['error'] = "Accès réservé à l'administrateur.";
-                header('Location: index.php?page=accueil');
-                exit();
-            }
-            $articles = $this->articleService->getAllArticles();
-
-            // Récupérer tous les utilisateurs pour la gestion admin
-            $userRepository = new \Repositories\UserRepository((new \Config\Database())->getConnection());
-            $users = $userRepository->getAll();
-
-            require_once 'src/views/front/admin.php';
+    public function displayAdmin()
+    {
+        if (empty($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+            $_SESSION['error'] = "Accès réservé à l'administrateur.";
+             header('Location: index.php?page=accueil');
+            exit();
         }
+        $articles = $this->articleService->getAllArticles();
+
+         $userRepository = new \Repositories\UserRepository((new \Config\Database())->getConnection());
+         $users = $userRepository->getAll();
+
+        require_once 'src/views/front/admin.php';
+    }
+
+    public function displayMesArticles()
+    {
+        if (empty($_SESSION['user_id'])) {
+            $_SESSION['error'] = "Vous devez être connecté pour voir vos articles.";
+            header('Location: index.php?page=connexion');
+            exit();
+        }
+        $mesArticles = $this->articleService->getArticlesByUserId($_SESSION['user_id']);
+        require_once 'src/views/front/mes-articles.php';
+    }
 }

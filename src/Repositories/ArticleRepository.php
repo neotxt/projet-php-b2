@@ -169,4 +169,13 @@ public function getAllSizes(): array
         );
     }
 
+    public function getArticlesByUserId(int $userId): array
+    {
+        $sql = 'SELECT * FROM Articles WHERE seller_id = :user_id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['user_id' => $userId]);
+        $articlesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->createArticleObjects($articlesData);
+    }
+
 }

@@ -21,6 +21,7 @@ class OrderController
         ];
 
         $this->orderService->createOrder($orderInfo);
+        $_SESSION['panier'] = [];
         header('Location: index.php?page=accueil');
         exit();
     }

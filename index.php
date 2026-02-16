@@ -108,7 +108,7 @@ switch ($page) {
         $articleController->displayVente();
         break;
     case 'mes-articles':
-        include_once 'src/views/front/mes-articles.php';
+        $articleController->displayMesArticles();
         break;
     case 'admin':
         $articleController->displayAdmin();

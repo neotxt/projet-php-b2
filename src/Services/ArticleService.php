@@ -122,4 +122,9 @@ class ArticleService
     {
         $this->articleRepository->delete($id);
     }
+
+    public function getArticlesByUserId(int $userId): array
+    {
+        return $this->articleRepository->getArticlesByUserId($userId);
+    }
 }

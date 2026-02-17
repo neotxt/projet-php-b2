@@ -96,10 +96,13 @@ ADD FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE;
 -- 1. Insérer les rôles
 INSERT INTO Roles (role_name) VALUES ('vendeur'), ('acheteur');
 
+-- 2. Ajouter un utilisateur de test
+INSERT INTO Users (is_admin, last_name, first_name, email, password) 
+VALUES (1, 'Test', 'Ynov', 'test@ynov.com', '$2y$12$hSE7YnnyKUg6yTVHP.bJe.kPBt9wOLIOS.AtBd.aApQIVAUxPDbRy');
+
 -- 3. Insérer les articles
 INSERT INTO Articles (seller_id, title, description, price, category, size, brand, `condition`, image) VALUES
 (1, 'jean Slim', 'jean slim bleu', 10.99, 'pantalon', 'M', 'Levi\'s', 'bon état', 'https://tse3.mm.bing.net/th/id/OIP._W2bBZPojv_7wUhRHOTTCAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3'),
 (1, 'pantalon cargo', 'pentalon cargo beige', 15.99, 'pantalon', 'L', 'H&M', 'trés bon état', 'https://media.atlasformen.com/webmedia/1080by1242/be/e2/44/bee24439ed128eaadb7db412d9a855ae.jpg?w=1200'),
-(1, 'jogging noir', 'jogging noir de sport', 12.99, 'pantalon', 'S', 'Nike', 'bon état', 'https://tse4.mm.bing.net/th/id/OIP.63i-viB86CMhEcRIM1IQUwHaJ3?rs=1&pid=ImgDetMain&o=7&rm=3');
-
+(1, 'jogging noir', 'jogging noir de sport', 12.99, 'pantalon', 'S', 'Nike', 'bon état', 'https://tse4.mm.bing.net/th/id/OIP.63i-viB86CMhEcRIM1IQUwHaJ3?rs=1&pid=ImgDetMain&o=7&rm=3'),
 (1, 'T-shirt blanc', 'T-shirt blanc en coton, bon état', 8.99, 'tshirt', 'M', 'Nike', 'bon état', 'https://example.com/tshirt-blanc.jpg');

@@ -49,7 +49,7 @@ Lorsqu'un utilisateur valide son panier, il renseigne ses informations de livrai
 
 ## Accès admin
 
-Un compte admin est présent dans la base de données (voir `database.sql`).
+Un compte admin de test est accessible en se connectant avec l'adresse mail test@ynov.com et le mot de passe Test123!.
 
 ---
 Projet réalisé en février 2026
